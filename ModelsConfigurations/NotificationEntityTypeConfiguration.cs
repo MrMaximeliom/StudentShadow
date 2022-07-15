@@ -8,9 +8,9 @@ namespace StudentShadow.ModelsConfigurations
         public void Configure(EntityTypeBuilder<Notification> builder)
         {
             // Configuring Token property
-            builder.Property(notificationProperty => notificationProperty.Token)
-                .IsRequired(true)
-                .HasComment("Token Id");
+            //builder.Property(notificationProperty => notificationProperty.Token)
+            //    .IsRequired(true)
+            //    .HasComment("Token Id");
 
             //Configuring Title property
             builder.Property(notificationProperty => notificationProperty.Title)
@@ -26,14 +26,11 @@ namespace StudentShadow.ModelsConfigurations
 
 
             //Configuring Date property
-            builder.Property(notificationProperty => notificationProperty.Date)
+            builder.Property(notificationProperty => notificationProperty.DateTime)
                 .IsRequired(false)
                 .HasComment("Notification date");
 
-            //Configuring Time property
-            builder.Property(notificationProperty => notificationProperty.Time)
-                .IsRequired(false)
-                .HasComment("Notification time");
+          
 
             //Configuring Type property
             builder.Property(notificationProperty => notificationProperty.Type)

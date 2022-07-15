@@ -35,52 +35,54 @@ namespace StudentShadow.Data
             // Configuring Users model
             new UserEntityTypeConfiguration().Configure(modelBuilder.Entity<User>());
 
+         
             // Configuring Wallets model
-            new WalletEntityTypeConfiguration().Configure(modelBuilder.Entity<Wallet>());
+            new WalletEntityTypeConfiguration().Configure(modelBuilder.Entity<Wallet>()) ;
+
 
             // Configuring Tokens model
             new TokenEntityTypeConfiguration().Configure(modelBuilder.Entity<Token>());
 
-            // Configuring Teachers model
+            //// Configuring Teachers model
             new TeacherEntityTypeConfiguration().Configure(modelBuilder.Entity<Teacher>());
 
-            // Configuring Students model
+            //// Configuring Students model
             new StudentEntityTypeConfiguration().Configure(modelBuilder.Entity<Student>());
 
-            // Configuring Notifications model
+            //// Configuring Notifications model
             new NotificationEntityTypeConfiguration().Configure(modelBuilder.Entity<Notification>());
 
-            // Configuring Grades model
+            //// Configuring Grades model
             new GradeEntityTypeConfiguration().Configure(modelBuilder.Entity<Grade>());
 
-            // Configuring MedicalHistories model
+            //// Configuring MedicalHistories model
             new MedicalHistoryEntityTypeConfiguration().Configure(modelBuilder.Entity<MedicalHistory>());
 
-            // Configuring Attendences model
+            //// Configuring Attendences model
             new AttendanceEntityTypeConfiguration().Configure(modelBuilder.Entity<Attendance>());
 
-            // Configuring Diseases model
+            //// Configuring Diseases model
             new DiseaseEntityTypeConfiguration().Configure(modelBuilder.Entity<Disease>());
 
-            // Configuring Degrees model
+            //// Configuring Degrees model
             new DegreeEntityTypeConfiguration().Configure(modelBuilder.Entity<Degree>());
 
-            // Configuring ContactUs model
+            //// Configuring ContactUs model
             new ContactUsEntityTypeConfiguration().Configure(modelBuilder.Entity<ContactUs>());
 
-            // Configuring AboutUS model
+            //// Configuring AboutUS model
             new AboutUsEntityTypeConfiguration().Configure(modelBuilder.Entity<AboutUs>());
 
-            // Configuring HomeWorks model
+            //// Configuring HomeWorks model
             new HomeWorkEntityTypeConfiguration().Configure(modelBuilder.Entity<HomeWork>());
 
-            // Configuring Subjects model
+            //// Configuring Subjects model
             new SubjectEntityTypeConfiguration().Configure(modelBuilder.Entity<Subject>());
 
-            // Configuring Schedules model
+            //// Configuring Schedules model
             new ScheduleEntityTypeConfiguration().Configure(modelBuilder.Entity<Schedule>());
 
-            // Configuring Schools model
+            //// Configuring Schools model
             new SchoolEntityTypeConfiguration().Configure(modelBuilder.Entity<School>());
         }
     }

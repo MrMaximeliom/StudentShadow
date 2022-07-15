@@ -34,7 +34,7 @@ namespace StudentShadow.ModelsConfigurations
 
             //Configuring Gender property
             builder.Property(userProperty => userProperty.Gender)
-                .IsRequired(false)
+                .IsRequired(true)
                 .HasMaxLength(10)
                 .HasComment("User gender");
 

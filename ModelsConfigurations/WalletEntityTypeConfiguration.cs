@@ -7,10 +7,12 @@ namespace StudentShadow.ModelsConfigurations
     {
         public void Configure(EntityTypeBuilder<Wallet> builder)
         {
+            // Configure relationship
+           
             // Configuring User property
-            builder.Property(walletProperty => walletProperty.User)
-                .IsRequired(true)
-                .HasComment("Student Id");
+            //builder.Property(walletProperty => walletProperty.User)
+            //    .IsRequired(true)
+            //    .HasComment("Student Id");
 
             //Configuring QRCode property
             builder.Property(walletProperty => walletProperty.QRCode)
@@ -21,11 +23,11 @@ namespace StudentShadow.ModelsConfigurations
             //Configuring Amount property
             builder.Property(walletProperty => walletProperty.Amount)
                 .IsRequired(true)
-                .HasDefaultValue(0.0)
+                .HasPrecision(9,3)
                 .HasComment("Wallet amount");
 
             //Configuring LastUpdated property
-            builder.Property(walletProperty => walletProperty.LastUpdated)
+            builder.Property(walletProperty => walletProperty.LastUpdatedDateTime)
                 .IsRequired(false)
                 .HasComment("LastUpdated");
 

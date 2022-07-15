@@ -8,17 +8,17 @@ namespace StudentShadow.ModelsConfigurations
         public void Configure(EntityTypeBuilder<Attendance> builder)
         {
             // Configuring User property
-            builder.Property(attendanceProperty => attendanceProperty.User)
-                .IsRequired(true)
-                .HasComment("Student Id");
+            //builder.Property(attendanceProperty => attendanceProperty.User)
+            //    .IsRequired(true)
+            //    .HasComment("Student Id");
 
             //Configuring Subject  property
-            builder.Property(attendanceProperty => attendanceProperty.Subject)
-                .IsRequired(true)
-                .HasComment("Subject Id");
+            //builder.Property(attendanceProperty => attendanceProperty.Subject)
+            //    .IsRequired(true)
+            //    .HasComment("Subject Id");
 
             //Configuring Date property
-            builder.Property(attendanceProperty => attendanceProperty.Date)
+            builder.Property(attendanceProperty => attendanceProperty.DateTime)
                 .IsRequired(false)
                 .HasComment("Date");
 

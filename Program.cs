@@ -1,8 +1,19 @@
+using Microsoft.EntityFrameworkCore;
+using StudentShadow.Data;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
 builder.Services.AddControllers();
+// Add DB Context
+builder.Services.AddDbContext<ApplicationDBContext>(
+
+    options => options.UseSqlServer(
+        builder.Configuration.GetConnectionString("DefaultConnection"),
+    b => b.MigrationsAssembly(typeof(ApplicationDBContext).Assembly.FullName))
+    );
+
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();

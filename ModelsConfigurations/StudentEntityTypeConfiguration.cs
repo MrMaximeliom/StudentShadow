@@ -9,19 +9,24 @@ namespace StudentShadow.ModelsConfigurations
         public void Configure(EntityTypeBuilder<Student> builder)
         {
             // Configuring School property
-            builder.Property(studentProperty => studentProperty.School)
-                .IsRequired(true)
-                .HasComment("Student school");
+            //builder.Property(studentProperty => studentProperty.School)
+            //    .IsRequired(true)
+            //    .HasComment("Student school");
 
             //Configuring Grade property
-            builder.Property(studentProperty => studentProperty.Grade)
-                .IsRequired(true)
-                .HasComment("Student grade");
+            //builder.Property(studentProperty => studentProperty.Grade)
+            //    .IsRequired(true)
+            //    .HasComment("Student grade");
 
             //Configuring User property
-            builder.Property(studentProperty => studentProperty.User)
-                .IsRequired(false)
-                .HasComment("User Id");
+            //builder.Property(studentProperty => studentProperty.User)
+            //    .IsRequired(false)
+            //    .HasComment("User Id");
+
+            builder.HasIndex(
+               b => new { b.Id, b.UserId }
+                )
+                .IsUnique();
 
         }
 

@@ -13,10 +13,10 @@ namespace StudentShadow.ModelsConfigurations
                 .HasMaxLength(200)
                 .HasComment("Registeration Token");
 
-            //Configuring User property
-            builder.Property(registerationToken => registerationToken.User)
-                .IsRequired(true)
-                .HasComment("User Id");
+            ////Configuring User property
+            //builder.Property(registerationToken => registerationToken.User)
+            //    .IsRequired(true)
+            //    .HasComment("User Id");
 
             //Configuring OsType property
             builder.Property(registerationToken => registerationToken.OSType)

@@ -13,11 +13,6 @@ namespace StudentShadow.ModelsConfigurations
                 .HasMaxLength(300)
                 .HasComment("School name");
 
-            //Configuring Address property
-            builder.Property(schoolProperty => schoolProperty.Address)
-                .IsRequired(false)
-                .HasMaxLength(400)
-                .HasComment("School address");
 
             //Configuring Logo property
             builder.Property(schoolProperty => schoolProperty.Logo)

@@ -8,12 +8,12 @@ namespace StudentShadow.ModelsConfigurations
         public void Configure(EntityTypeBuilder<Schedule> builder)
         {
             // Configuring Subject property
-            builder.Property(scheduleProperty => scheduleProperty.Subject)
-                .IsRequired(true)
-                .HasComment("Subject");
+            //builder.Property(scheduleProperty => scheduleProperty.Subject)
+            //    .IsRequired(true)
+            //    .HasComment("Subject");
 
             //Configuring Date property
-            builder.Property(scheduleProperty => scheduleProperty.Date)
+            builder.Property(scheduleProperty => scheduleProperty.DateTime)
                 .IsRequired(false)
                 .HasComment("Date");
 

@@ -8,27 +8,28 @@ namespace StudentShadow.ModelsConfigurations
         public void Configure(EntityTypeBuilder<HomeWork> builder)
         {
             // Configuring Student property
-            builder.Property(homeWorkProperty => homeWorkProperty.Student)
-                .IsRequired(true)
-                .HasComment("Student Id");
+            //builder.Property(homeWorkProperty => homeWorkProperty.Student)
+            //    .IsRequired(true)
+            //    .HasComment("Student Id");
 
             //Configuring Subject property
-            builder.Property(homeWorkProperty => homeWorkProperty.Subject)
-                .IsRequired(true)
-                .HasComment("Subject");
+            //builder.Property(homeWorkProperty => homeWorkProperty.Subject)
+            //    .IsRequired(true)
+            //    .HasComment("Subject");
 
             //Configuring Teacher property
-            builder.Property(homeWorkProperty => homeWorkProperty.Teacher)
-                .IsRequired(true)
-                .HasComment("Teacher Id");
+            //builder.Property(homeWorkProperty => homeWorkProperty.Teacher)
+            //    .IsRequired(true)
+            //    .HasComment("Teacher Id");
 
+            
             //Configuring AssignmentDate property
-            builder.Property(homeWorkProperty => homeWorkProperty.AssignmentDate)
+            builder.Property(homeWorkProperty => homeWorkProperty.AssignmentDateTime)
                 .IsRequired(false)
                 .HasComment("Assignment date");
 
             //Configuring DueDate property
-            builder.Property(homeWorkProperty => homeWorkProperty.DueDate)
+            builder.Property(homeWorkProperty => homeWorkProperty.DueDateTime)
                 .IsRequired(true)
                 .HasComment("Due date");
 

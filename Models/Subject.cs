@@ -2,18 +2,26 @@
 {
     public class Subject
     {
+       
         public int Id { get; set; }
 
         public string Title { get; set; }
 
-        public Grade Grade { get; set; }
+        public int GradeId { get; set; }
+        public virtual Grade Grade { get; set; }
 
-        public DateOnly StartDate { get; set; }
+        public DateTime? StartDateTime { get; set; }
 
-        public DateOnly EndDate { get; set; }
+        public DateTime? EndDateTime { get; set; }
 
         public decimal FullDegree { get; set; }
 
         public decimal PassDegree { get; set; }
+        public virtual ICollection<Teacher> Teachers { get; private set; }
+        public Subject()
+        {
+            this.Teachers = new HashSet<Teacher>();
+        }
+
     }
 }

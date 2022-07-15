@@ -8,8 +8,9 @@ namespace StudentShadow.Models
 
         public string RegisterationToken { get; set; }
 
-        public User User { get; set; }
+        public int UserId { get; set; }
+        public virtual User User { get; set; }
 
-        public OSType OSType { get; set; }
+        public OSType? OSType { get; set; }
     }
 }

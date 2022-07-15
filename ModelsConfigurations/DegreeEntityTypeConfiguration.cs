@@ -8,14 +8,14 @@ namespace StudentShadow.ModelsConfigurations
         public void Configure(EntityTypeBuilder<Degree> builder)
         {
             // Configuring User property
-            builder.Property(DegreeProperty => DegreeProperty.User)
-                .IsRequired(true)
-                .HasComment("Student Id");
+            //builder.Property(DegreeProperty => DegreeProperty.User)
+            //    .IsRequired(true)
+            //    .HasComment("Student Id");
 
             //Configuring Subject property
-            builder.Property(DegreeProperty => DegreeProperty.Subject)
-                .IsRequired(true)
-                .HasComment("Subject");
+            //builder.Property(DegreeProperty => DegreeProperty.Subject)
+            //    .IsRequired(true)
+            //    .HasComment("Subject");
 
             //Configuring CharGrade property
             builder.Property(DegreeProperty => DegreeProperty.CharGrade)
@@ -24,7 +24,7 @@ namespace StudentShadow.ModelsConfigurations
                 .HasComment("Char grade");
 
             //Configuring Date property
-            builder.Property(DegreeProperty => DegreeProperty.Date)
+            builder.Property(DegreeProperty => DegreeProperty.DateTime)
                 .IsRequired(false)
                 .HasComment("Date");
 

@@ -8,14 +8,14 @@ namespace StudentShadow.ModelsConfigurations
         public void Configure(EntityTypeBuilder<MedicalHistory> builder)
         {
             // Configuring User property
-            builder.Property(medicalHistoryProperty => medicalHistoryProperty.User)
-                .IsRequired(true)
-                .HasComment("Student Id");
+            //builder.Property(medicalHistoryProperty => medicalHistoryProperty.User)
+            //    .IsRequired(true)
+            //    .HasComment("Student Id");
 
             //Configuring Disease property
-            builder.Property(medicalHistoryProperty => medicalHistoryProperty.Disease)
-                .IsRequired(true)
-                .HasComment("Student disease");
+            //builder.Property(medicalHistoryProperty => medicalHistoryProperty.Disease)
+            //    .IsRequired(true)
+            //    .HasComment("Student disease");
 
             //Configuring ExaminedDate property
             builder.Property(medicalHistoryProperty => medicalHistoryProperty.ExaminedDateTime)
