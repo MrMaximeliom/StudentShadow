@@ -21,9 +21,11 @@ namespace StudentShadow.UnitOfWork
         IGenericRepository<AboutUs> AboutUs { get; }
         IGenericRepository<ContactUs> ContactUs { get; }
         IGenericRepository<Attendance> Attendances { get; }
-    
+        int Complete();
 
-  
+
+
+
 
 
     }

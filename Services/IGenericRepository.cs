@@ -5,7 +5,9 @@ namespace StudentShadow.Services
 {
     public interface IGenericRepository<T> where T:class
     {
-        T GetByIdAsync(int id);
+        T GetById(int id);
+
+        Task<T> GetByIdAsync(int id);
 
         Task<IEnumerable<T>> GetAllAsync();
 

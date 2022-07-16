@@ -1,0 +1,424 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>StudentShadow</name>
+    </assembly>
+    <members>
+        <member name="M:StudentShadow.Controllers.AboutUsController.GetAboutUsAsync">
+            <summary>
+            Returns a list of information about the company
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:StudentShadow.Controllers.AboutUsController.GetAboutUsByIdAsync(System.Int32)">
+            <summary>
+            Returns a list of information about the company by its id
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:StudentShadow.Controllers.AboutUsController.AddUser(StudentShadow.Models.AboutUs)">
+            <summary>
+            Creates a record with information about the company   
+            </summary>
+            <returns></returns>
+            
+        </member>
+        <member name="M:StudentShadow.Controllers.AboutUsController.UpdateAboutUs(System.Int32,Microsoft.AspNetCore.JsonPatch.JsonPatchDocument{StudentShadow.Models.AboutUs})">
+            <summary>
+            Updates company information by id   
+            </summary>
+            <returns></returns>
+            
+        </member>
+        <member name="M:StudentShadow.Controllers.AboutUsController.DeleteAboutUs(System.Int32)">
+            <summary>
+            Deletes a record with company information with a given id
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:StudentShadow.Controllers.AttendancesController.GetAttendancesAsync">
+            <summary>
+            Returns a list of attendances 
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:StudentShadow.Controllers.AttendancesController.GetAttendanceByIdAsync(System.Int32)">
+            <summary>
+            Returns an attendance by its id
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:StudentShadow.Controllers.AttendancesController.AddAttendance(StudentShadow.Models.Attendance)">
+            <summary>
+            Creates a user    
+            </summary>
+            <returns></returns>
+            
+        </member>
+        <member name="M:StudentShadow.Controllers.AttendancesController.UpdateAttendance(System.Int32,Microsoft.AspNetCore.JsonPatch.JsonPatchDocument{StudentShadow.Models.Attendance})">
+            <summary>
+            Updates an attendance by id   
+            </summary>
+            <returns></returns>
+            
+        </member>
+        <member name="M:StudentShadow.Controllers.AttendancesController.DeleteAttendances(System.Int32)">
+            <summary>
+            Deletes an attendance with a given id
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:StudentShadow.Controllers.ContactUsController.GetContactsAsync">
+            <summary>
+            Returns a list of contacts
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:StudentShadow.Controllers.ContactUsController.GetContactByIdAsync(System.Int32)">
+            <summary>
+            Returns a contact by its id
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:StudentShadow.Controllers.ContactUsController.AddContact(StudentShadow.Models.ContactUs)">
+            <summary>
+            Creates a contact    
+            </summary>
+            <returns></returns>
+            
+        </member>
+        <member name="M:StudentShadow.Controllers.ContactUsController.UpdateContact(System.Int32,Microsoft.AspNetCore.JsonPatch.JsonPatchDocument{StudentShadow.Models.ContactUs})">
+            <summary>
+            Updates a contact by id   
+            </summary>
+            <returns></returns>
+            
+        </member>
+        <member name="M:StudentShadow.Controllers.ContactUsController.DeleteContact(System.Int32)">
+            <summary>
+            Deletes a contact with a given id
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:StudentShadow.Controllers.DiseasesController.GetDiseasesAsync">
+            <summary>
+            Returns a list of diseases 
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:StudentShadow.Controllers.DiseasesController.GetDiseaseByIdAsync(System.Int32)">
+            <summary>
+            Returns a disease by its id
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:StudentShadow.Controllers.DiseasesController.AddUser(StudentShadow.Models.Disease)">
+            <summary>
+            Creates a disease   
+            </summary>
+            <returns></returns>
+            
+        </member>
+        <member name="M:StudentShadow.Controllers.DiseasesController.UpdateDisease(System.Int32,Microsoft.AspNetCore.JsonPatch.JsonPatchDocument{StudentShadow.Models.Disease})">
+            <summary>
+            Updates a disease by id   
+            </summary>
+            <returns></returns>
+            
+        </member>
+        <member name="M:StudentShadow.Controllers.DiseasesController.DeleteDisease(System.Int32)">
+            <summary>
+            Deletes a disease with a given id
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:StudentShadow.Controllers.HomeWorksController.GetHomeWorksAsync">
+            <summary>
+            Returns a list of home works 
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:StudentShadow.Controllers.HomeWorksController.GetHomeWorksByIdAsync(System.Int32)">
+            <summary>
+            Returns a home work by its id
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:StudentShadow.Controllers.HomeWorksController.AddHomeWorks(StudentShadow.Models.HomeWork)">
+            <summary>
+            Creates a home work
+            </summary>
+            <returns></returns>
+            
+        </member>
+        <member name="M:StudentShadow.Controllers.HomeWorksController.UpdateHomeWork(System.Int32,Microsoft.AspNetCore.JsonPatch.JsonPatchDocument{StudentShadow.Models.HomeWork})">
+            <summary>
+            Updates a home work by id   
+            </summary>
+            <returns></returns>
+            
+        </member>
+        <member name="M:StudentShadow.Controllers.HomeWorksController.DeleteHomeWorks(System.Int32)">
+            <summary>
+            Deletes a homeWork with a given id
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:StudentShadow.Controllers.MedicalHistoriesController.GetMedicalHistoriesAsync">
+            <summary>
+            Returns a list of medical histories 
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:StudentShadow.Controllers.MedicalHistoriesController.GetMedicalHistoriesByIdAsync(System.Int32)">
+            <summary>
+            Returns a medical history by its id
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:StudentShadow.Controllers.MedicalHistoriesController.AddMedicalHistory(StudentShadow.Models.MedicalHistory)">
+            <summary>
+            Creates a medical history
+            </summary>
+            <returns></returns>
+            
+        </member>
+        <member name="M:StudentShadow.Controllers.MedicalHistoriesController.UpdateMedicalHistory(System.Int32,Microsoft.AspNetCore.JsonPatch.JsonPatchDocument{StudentShadow.Models.MedicalHistory})">
+            <summary>
+            Updates a medical history by id   
+            </summary>
+            <returns></returns>
+            
+        </member>
+        <member name="M:StudentShadow.Controllers.MedicalHistoriesController.DeleteMedicalHistories(System.Int32)">
+            <summary>
+            Deletes a medical history with a given id
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:StudentShadow.Controllers.SchedulesController.GetSchedulesAsync">
+            <summary>
+            Returns a list of schedules 
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:StudentShadow.Controllers.SchedulesController.GetScheduleByIdAsync(System.Int32)">
+            <summary>
+            Returns a schedule by its id
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:StudentShadow.Controllers.SchedulesController.AddSchedule(StudentShadow.Models.Schedule)">
+            <summary>
+            Creates a schedule   
+            </summary>
+            <returns></returns>
+            
+        </member>
+        <member name="M:StudentShadow.Controllers.SchedulesController.UpdateSchedule(System.Int32,Microsoft.AspNetCore.JsonPatch.JsonPatchDocument{StudentShadow.Models.Schedule})">
+            <summary>
+            Updates a schedule by id   
+            </summary>
+            <returns></returns>
+            
+        </member>
+        <member name="M:StudentShadow.Controllers.SchedulesController.DeleteSchedules(System.Int32)">
+            <summary>
+            Deletes a schedule with a given id
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:StudentShadow.Controllers.SchoolsController.GetSchoolsAsync">
+            <summary>
+            Returns a list of schools
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:StudentShadow.Controllers.SchoolsController.GetSchoolByIdAsync(System.Int32)">
+            <summary>
+            Returns a school by its id
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:StudentShadow.Controllers.SchoolsController.AddSchool(StudentShadow.Models.School)">
+            <summary>
+            Creates a school    
+            </summary>
+            <returns></returns>
+            
+        </member>
+        <member name="M:StudentShadow.Controllers.SchoolsController.UpdateSchool(System.Int32,Microsoft.AspNetCore.JsonPatch.JsonPatchDocument{StudentShadow.Models.School})">
+            <summary>
+            Updates a school by id   
+            </summary>
+            <returns></returns>
+            
+        </member>
+        <member name="M:StudentShadow.Controllers.SchoolsController.DeleteSchools(System.Int32)">
+            <summary>
+            Deletes a school with a given id
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:StudentShadow.Controllers.StudentsController.GetStudentsAsync">
+            <summary>
+            Returns a list of students
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:StudentShadow.Controllers.StudentsController.GetStudentByIdAsync(System.Int32)">
+            <summary>
+            Returns a student by its id
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:StudentShadow.Controllers.StudentsController.AddStudent(StudentShadow.Models.Student)">
+            <summary>
+            Creates a student    
+            </summary>
+            <returns></returns>
+            
+        </member>
+        <member name="M:StudentShadow.Controllers.StudentsController.UpdateStudent(System.Int32,Microsoft.AspNetCore.JsonPatch.JsonPatchDocument{StudentShadow.Models.Student})">
+            <summary>
+            Updates a student by id   
+            </summary>
+            <returns></returns>
+            
+        </member>
+        <member name="M:StudentShadow.Controllers.StudentsController.DeleteStudents(System.Int32)">
+            <summary>
+            Deletes a student with a given id
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:StudentShadow.Controllers.SubjectsController.GetSubjectsAsync">
+            <summary>
+            Returns a list of subjects
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:StudentShadow.Controllers.SubjectsController.GetSubjectByIdAsync(System.Int32)">
+            <summary>
+            Returns a subject by its id
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:StudentShadow.Controllers.SubjectsController.AddSubject(StudentShadow.Models.Subject)">
+            <summary>
+            Creates a subject    
+            </summary>
+            <returns></returns>
+            
+        </member>
+        <member name="M:StudentShadow.Controllers.SubjectsController.UpdateSubject(System.Int32,Microsoft.AspNetCore.JsonPatch.JsonPatchDocument{StudentShadow.Models.Subject})">
+            <summary>
+            Updates a subject by id   
+            </summary>
+            <returns></returns>
+            
+        </member>
+        <member name="M:StudentShadow.Controllers.SubjectsController.DeleteSubjects(System.Int32)">
+            <summary>
+            Deletes a subject with a given id
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:StudentShadow.Controllers.TokensController.GetTokensAsync">
+            <summary>
+            Returns a list of tokens 
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:StudentShadow.Controllers.TokensController.GetTokensByIdAsync(System.Int32)">
+            <summary>
+            Returns a token by its id
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:StudentShadow.Controllers.TokensController.AddToken(StudentShadow.Models.Token)">
+            <summary>
+            Creates a token  
+            </summary>
+            <returns></returns>
+            
+        </member>
+        <member name="M:StudentShadow.Controllers.TokensController.UpdateToken(System.Int32,Microsoft.AspNetCore.JsonPatch.JsonPatchDocument{StudentShadow.Models.Token})">
+            <summary>
+            Updates a token by id   
+            </summary>
+            <returns></returns>
+            
+        </member>
+        <member name="M:StudentShadow.Controllers.TokensController.DeleteTokens(System.Int32)">
+            <summary>
+            Deletes a token with a given id
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:StudentShadow.Controllers.UsersController.GetUsersAsync">
+            <summary>
+            Returns a list of users 
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:StudentShadow.Controllers.UsersController.GetUserByIdAsync(System.Int32)">
+            <summary>
+            Returns a user by its id
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:StudentShadow.Controllers.UsersController.AddUser(StudentShadow.Models.User)">
+            <summary>
+            Creates a user    
+            </summary>
+            <returns></returns>
+            
+        </member>
+        <member name="M:StudentShadow.Controllers.UsersController.UpdateUser(System.Int32,Microsoft.AspNetCore.JsonPatch.JsonPatchDocument{StudentShadow.Models.User})">
+            <summary>
+            Updates a user by id   
+            </summary>
+            <returns></returns>
+            
+        </member>
+        <member name="M:StudentShadow.Controllers.UsersController.DeleteUsers(System.Int32)">
+            <summary>
+            Deletes a user with a given id
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:StudentShadow.Controllers.WalletsController.GetWalletsAsync">
+            <summary>
+            Returns a list of wallets 
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:StudentShadow.Controllers.WalletsController.GetWalletByIdAsync(System.Int32)">
+            <summary>
+            Returns a wallet by its id
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:StudentShadow.Controllers.WalletsController.AddWallet(StudentShadow.Models.Wallet)">
+            <summary>
+            Creates a wallet   
+            </summary>
+            <returns></returns>
+            
+        </member>
+        <member name="M:StudentShadow.Controllers.WalletsController.UpdateWallet(System.Int32,Microsoft.AspNetCore.JsonPatch.JsonPatchDocument{StudentShadow.Models.Wallet})">
+            <summary>
+            Updates a wallet by id   
+            </summary>
+            <returns></returns>
+            
+        </member>
+        <member name="M:StudentShadow.Controllers.WalletsController.DeleteWallets(System.Int32)">
+            <summary>
+            Deletes a wallet with a given id
+            </summary>
+            <returns></returns>
+        </member>
+    </members>
+</doc>

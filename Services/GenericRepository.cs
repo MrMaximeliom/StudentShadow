@@ -118,20 +118,29 @@ namespace StudentShadow.Services
                 return await query.SingleOrDefaultAsync();
 
         }
-
-        public Task<IEnumerable<T>> GetAllAsync()
+        public  T GetById(int id)
         {
-            throw new NotImplementedException();
+            return _context.Set<T>().Find(id);
+
         }
 
-        public T GetByIdAsync(int id)
+        public async Task<IEnumerable<T>> GetAllAsync()
         {
-            throw new NotImplementedException();
+            return await _context.Set<T>().ToListAsync();
+            
+        }
+
+        public async Task<T> GetByIdAsync(int id)
+        {
+            return await _context.Set<T>().FindAsync(id);
+           
         }
 
         public T Update(T entity)
         {
-            throw new NotImplementedException();
+            _context.Update(entity);
+            return entity;
+           
         }
     }
 }
