@@ -75,7 +75,7 @@ namespace StudentShadow.Controllers
             Schedule? newSchedule = await _unitOfWork.Schedules.AddAsync(schedule);
             if (newSchedule != null)
             {
-                _unitOfWork.Complete();
+                await _unitOfWork.CompleteAsync();
                 return Created("Schedule Added Successfully", schedule);
 
             }
@@ -103,7 +103,7 @@ namespace StudentShadow.Controllers
             {
                 scheduleUpdates.ApplyTo(schedule);
                 _unitOfWork.Schedules.Update(schedule);
-                _unitOfWork.Complete();
+                await _unitOfWork.CompleteAsync();
                 return NoContent();
             }
             else
@@ -126,7 +126,7 @@ namespace StudentShadow.Controllers
             if (deletedSchedule != null)
             {
                 _unitOfWork.Schedules.Delete(deletedSchedule);
-                _unitOfWork.Complete();
+                await _unitOfWork.CompleteAsync();
                 return NoContent();
             }
             else

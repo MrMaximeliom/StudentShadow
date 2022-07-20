@@ -75,7 +75,8 @@ namespace StudentShadow.Controllers
             Wallet? newWallet = await _unitOfWork.Wallets.AddAsync(wallet);
             if (newWallet != null)
             {
-                _unitOfWork.Complete();
+                await _unitOfWork.CompleteAsync();
+
                 return Created("Wallet Added Successfully", wallet);
 
             }
@@ -103,7 +104,7 @@ namespace StudentShadow.Controllers
             {
                 walletUpdates.ApplyTo(wallet);
                 _unitOfWork.Wallets.Update(wallet);
-                _unitOfWork.Complete();
+                await _unitOfWork.CompleteAsync();
                 return NoContent();
             }
             else
@@ -126,7 +127,7 @@ namespace StudentShadow.Controllers
             if (deletedWallet != null)
             {
                 _unitOfWork.Wallets.Delete(deletedWallet);
-                _unitOfWork.Complete();
+                await _unitOfWork.CompleteAsync();
                 return NoContent();
             }
             else

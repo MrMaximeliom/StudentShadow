@@ -84,6 +84,10 @@ namespace StudentShadow.UnitOfWork
         {
             return _context.SaveChanges();
         }
+        public async Task<int> CompleteAsync()
+        {
+            return await _context.SaveChangesAsync();
+        }
 
         public void Dispose()
         {

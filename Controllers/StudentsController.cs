@@ -75,7 +75,8 @@ namespace StudentShadow.Controllers
             Student? newStudent = await _unitOfWork.Students.AddAsync(student);
             if (newStudent != null)
             {
-                _unitOfWork.Complete();
+                await _unitOfWork.CompleteAsync();
+
                 return Created("Student Added Successfully", student);
 
             }
@@ -103,7 +104,7 @@ namespace StudentShadow.Controllers
             {
                 studentUpdates.ApplyTo(student);
                 _unitOfWork.Students.Update(student);
-                _unitOfWork.Complete();
+                await _unitOfWork.CompleteAsync();
                 return NoContent();
             }
             else
@@ -126,7 +127,7 @@ namespace StudentShadow.Controllers
             if (deletedStudent != null)
             {
                 _unitOfWork.Students.Delete(deletedStudent);
-                _unitOfWork.Complete();
+                await _unitOfWork.CompleteAsync();
                 return NoContent();
             }
             else

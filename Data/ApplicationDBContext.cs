@@ -26,10 +26,16 @@ namespace StudentShadow.Data
         {
 
         }
+        protected override void OnConfiguring(DbContextOptionsBuilder options)
+        {
+            options.UseSqlServer("Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=StudentShadow;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False");
+
+        }
         public ApplicationDBContext(DbContextOptions<ApplicationDBContext> options) : base(options)
         {
 
         }
+         
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             // Configuring Users model

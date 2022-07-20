@@ -74,7 +74,8 @@ namespace StudentShadow.Controllers
             Token? newToken = await _unitOfWork.Tokens.AddAsync(token);
             if (newToken != null)
             {
-                _unitOfWork.Complete();
+                await _unitOfWork.CompleteAsync();
+
                 return Created("Token Added Successfully", token);
 
             }
@@ -102,7 +103,8 @@ namespace StudentShadow.Controllers
             {
                 tokenUpdates.ApplyTo(token);
                 _unitOfWork.Tokens.Update(token);
-                _unitOfWork.Complete();
+                await _unitOfWork.CompleteAsync();
+
                 return NoContent();
             }
             else
@@ -125,7 +127,8 @@ namespace StudentShadow.Controllers
             if (deletedToken != null)
             {
                 _unitOfWork.Tokens.Delete(deletedToken);
-                _unitOfWork.Complete();
+                await _unitOfWork.CompleteAsync();
+
                 return NoContent();
             }
             else

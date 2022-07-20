@@ -74,7 +74,8 @@ namespace StudentShadow.Controllers
             MedicalHistory? newMedicalHistory = await _unitOfWork.MedicalHistories.AddAsync(medicalHistory);
             if (newMedicalHistory != null)
             {
-                _unitOfWork.Complete();
+                await _unitOfWork.CompleteAsync();
+
                 return Created("Medical History Added Successfully", medicalHistory);
 
             }
@@ -102,7 +103,7 @@ namespace StudentShadow.Controllers
             {
                 medicalHistoryUpdates.ApplyTo(medicalHistory);
                 _unitOfWork.MedicalHistories.Update(medicalHistory);
-                _unitOfWork.Complete();
+                await _unitOfWork.CompleteAsync();
                 return NoContent();
             }
             else
@@ -125,7 +126,7 @@ namespace StudentShadow.Controllers
             if (deletedMedicalHistory != null)
             {
                 _unitOfWork.MedicalHistories.Delete(deletedMedicalHistory);
-                _unitOfWork.Complete();
+                await _unitOfWork.CompleteAsync();
                 return NoContent();
             }
             else

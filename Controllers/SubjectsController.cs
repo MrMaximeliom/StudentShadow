@@ -74,7 +74,8 @@ namespace StudentShadow.Controllers
             Subject? newSubject = await _unitOfWork.Subjects.AddAsync(subject);
             if (newSubject != null)
             {
-                _unitOfWork.Complete();
+                await _unitOfWork.CompleteAsync();
+
                 return Created("Subject Added Successfully", subject);
 
             }
@@ -102,7 +103,8 @@ namespace StudentShadow.Controllers
             {
                 subjectUpdates.ApplyTo(subject);
                 _unitOfWork.Subjects.Update(subject);
-                _unitOfWork.Complete();
+                await _unitOfWork.CompleteAsync();
+
                 return NoContent();
             }
             else
@@ -125,7 +127,8 @@ namespace StudentShadow.Controllers
             if (deletedSubject != null)
             {
                 _unitOfWork.Subjects.Delete(deletedSubject);
-                _unitOfWork.Complete();
+                await _unitOfWork.CompleteAsync();
+
                 return NoContent();
             }
             else
