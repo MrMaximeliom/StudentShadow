@@ -69,7 +69,7 @@ namespace StudentShadow.Controllers
         [HttpPost]
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public async Task<IActionResult> AddUser(Disease disease)
+        public async Task<IActionResult> AddDisease(Disease disease)
         {
             Disease? newDisease = await _unitOfWork.Diseases.AddAsync(disease);
             if (newDisease != null)

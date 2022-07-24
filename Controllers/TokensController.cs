@@ -48,7 +48,7 @@ namespace StudentShadow.Controllers
         [HttpGet("{id}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public async Task<IActionResult> GetTokensByIdAsync(int id)
+        public async Task<IActionResult> GetTokenByIdAsync(int id)
         {
             Token? fetchedToken = await _unitOfWork.Tokens.GetByIdAsync(id);
             if (fetchedToken != null)

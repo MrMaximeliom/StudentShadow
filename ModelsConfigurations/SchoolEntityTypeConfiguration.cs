@@ -3,9 +3,9 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 namespace StudentShadow.ModelsConfigurations
 {
-    public class SchoolEntityTypeConfiguration:IEntityTypeConfiguration<School>
+    public class SchoolEntityTypeConfiguration:IEntityTypeConfiguration<Contact>
     {
-        public void Configure(EntityTypeBuilder<School> builder)
+        public void Configure(EntityTypeBuilder<Contact> builder)
         {
             // Configuring Name property
             builder.Property(schoolProperty => schoolProperty.Name)

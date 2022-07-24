@@ -13,7 +13,7 @@ namespace StudentShadow.UnitOfWork
 
         public IGenericRepository<Schedule> Schedules {get; private set;}
 
-        public IGenericRepository<School> Schools {get; private set;}
+        public IGenericRepository<Contact> Schools {get; private set;}
 
         public IGenericRepository<Subject> Subjects {get; private set;}
 
@@ -76,7 +76,7 @@ namespace StudentShadow.UnitOfWork
 
             Tokens = new GenericRepository<Token>(_context);
 
-            Schools = new GenericRepository<School>(_context);
+            Schools = new GenericRepository<Contact>(_context);
         }
 
 

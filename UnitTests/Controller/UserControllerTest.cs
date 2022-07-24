@@ -1,12 +1,8 @@
 ﻿using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
 using StudentShadow.Controllers;
-using StudentShadow.Data;
 using StudentShadow.Enums;
 using StudentShadow.Models;
-using StudentShadow.UnitOfWork;
-using System.Collections.Generic;
-using System.Linq;
 using Xunit;
 
 namespace StudentShadow.UnitTests.Controller
@@ -14,26 +10,23 @@ namespace StudentShadow.UnitTests.Controller
     public class UserControllerTest
     {
 
-        ApplicationDBContext context ;
         UsersController userController;
+        Initializer initializer;
 
-        IUnitOfWork unitOfWork ;
-
-        public void InitializeObjects()
+        public UserControllerTest()
         {
-          
-            context = new();
-
-            unitOfWork = new StudentShadow.UnitOfWork.UnitOfWork(context);
-
-            userController = new(unitOfWork);
+             initializer = new Initializer();
+            userController = new(initializer.unitOfWork);
         }
+
+
+
+
         [Fact]
         // test GetUsersAsync Method
         public async void GetUsersAsync_GetAllUsers_ReturnsListOfUsers()
         {
             //Arrange
-            InitializeObjects();
 
             //Act
 
@@ -53,7 +46,6 @@ namespace StudentShadow.UnitTests.Controller
         public async void GetUserByIdAsync_GetExistingUserById_ReturnsUserByItsId()
         {
             //Arrange
-            InitializeObjects();
 
             int userId = 1;
 
@@ -73,13 +65,12 @@ namespace StudentShadow.UnitTests.Controller
         public async void GetUserByIdAsync_GetNonExistingUserById_ReturnsNotFoundObject()
         {
             //Arrange
-            InitializeObjects();
            
-            int userId = 4;
+            int userId = 0;
 
             //Act
 
-            var actionResult = await unitOfWork.Users.GetByIdAsync(userId);
+            var actionResult = await userController.GetUserByIdAsync(userId);
 
 
 
@@ -93,7 +84,6 @@ namespace StudentShadow.UnitTests.Controller
         public async void AddUser_AddingNewUser_ReturnsNewelyAddedUser()
         {
             //Arange
-            InitializeObjects();
 
             User NewUser = new User()
             {
@@ -123,8 +113,7 @@ namespace StudentShadow.UnitTests.Controller
         public async void UpdateUser_UpdateExistingUserById_ReturnsNoContentResult()
         {
             //Arange
-            InitializeObjects();
-            int UserId = 2;
+            int UserId = 1;
 
             //Act 
             JsonPatchDocument<User> userUpdate = new();
@@ -144,8 +133,7 @@ namespace StudentShadow.UnitTests.Controller
         public async void DeleteUser_DeleteUserByd_ReturnsNoContnetResult()
         {
             //Arrange
-            InitializeObjects();
-            int UserId = 3;
+            int UserId = 1;
 
             //Act
             var NoContentObjectResult = await userController.DeleteUsers(UserId);

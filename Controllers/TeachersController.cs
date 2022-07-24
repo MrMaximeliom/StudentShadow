@@ -10,28 +10,29 @@ namespace StudentShadow.Controllers
     [Produces(MediaTypeNames.Application.Json)]
     [Consumes(MediaTypeNames.Application.Json)]
     [ApiController]
-    public class AboutUsController : ControllerBase
+    public class TeachersController : ControllerBase
     {
+
         private readonly IUnitOfWork _unitOfWork;
 
-        public AboutUsController(IUnitOfWork unitOfWork)
+        public TeachersController(IUnitOfWork unitOfWork)
         {
             _unitOfWork = unitOfWork;
         }
         /// <summary>
-        /// Returns a list of information about the company
+        /// Returns a list of teachers
         /// </summary>
         /// <returns></returns>
 
         [HttpGet]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public async Task<IActionResult> GetAboutUsAsync()
+        public async Task<IActionResult> GetTeachersAsync()
         {
-            IEnumerable<AboutUs> allAboutUs = await _unitOfWork.AboutUs.GetAllAsync();
-            if (allAboutUs != null)
+            IEnumerable<Teacher> allTeachers = await _unitOfWork.Teachers.GetAllAsync();
+            if (allTeachers != null)
             {
-                return Ok(allAboutUs);
+                return Ok(allTeachers);
             }
             else
             {
@@ -40,19 +41,19 @@ namespace StudentShadow.Controllers
 
         }
         /// <summary>
-        /// Returns a list of information about the company by its id
+        /// Returns a teacher by its id
         /// </summary>
         /// <returns></returns>
 
         [HttpGet("{id}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public async Task<IActionResult> GetAboutUsByIdAsync(int id)
+        public async Task<IActionResult> GetTeacherByIdAsync(int id)
         {
-            AboutUs? fetchedAboutUs = await _unitOfWork.AboutUs.GetByIdAsync(id);
-            if (fetchedAboutUs != null)
+            Teacher? fetchedTeacher = await _unitOfWork.Teachers.GetByIdAsync(id);
+            if (fetchedTeacher != null)
             {
-                return Ok(fetchedAboutUs);
+                return Ok(fetchedTeacher);
             }
             else
             {
@@ -61,20 +62,21 @@ namespace StudentShadow.Controllers
 
         }
         /// <summary>
-        /// Creates a record with information about the company   
+        /// Creates a teacher    
         /// </summary>
         /// <returns></returns>
         /// 
         [HttpPost]
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public async Task<IActionResult> AddAboutUs(AboutUs aboutUs)
+        public async Task<IActionResult> AddTeacher(Teacher teacher)
         {
-            AboutUs? newAboutUs = await _unitOfWork.AboutUs.AddAsync(aboutUs);
-            if (newAboutUs != null)
+            Teacher? newTeacher = await _unitOfWork.Teachers.AddAsync(teacher);
+            if (newTeacher != null)
             {
-                _unitOfWork.Complete();
-                return Created("Company Info Added Successfully", newAboutUs);
+                await _unitOfWork.CompleteAsync();
+
+                return Created("Teacher Added Successfully", teacher);
 
             }
             else
@@ -86,22 +88,22 @@ namespace StudentShadow.Controllers
 
         }
         /// <summary>
-        /// Updates company information by id   
+        /// Updates a teacher by id   
         /// </summary>
         /// <returns></returns>
         /// 
         [HttpPatch("{id}")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public async Task<ActionResult> UpdateAboutUs(int id, JsonPatchDocument<AboutUs> aboutUsUpdates)
+        public async Task<ActionResult> UpdateTeacher(int id, JsonPatchDocument<Teacher> teacherUpdates)
         {
-            AboutUs? aboutUs = await _unitOfWork.AboutUs.GetByIdAsync(id);
+            Teacher? teacher = await _unitOfWork.Teachers.GetByIdAsync(id);
 
-            if (aboutUs != null)
+            if (teacher != null)
             {
-                aboutUsUpdates.ApplyTo(aboutUs);
-                _unitOfWork.AboutUs.Update(aboutUs);
-                _unitOfWork.Complete();
+                teacherUpdates.ApplyTo(teacher);
+                _unitOfWork.Teachers.Update(teacher);
+                await _unitOfWork.CompleteAsync();
                 return NoContent();
             }
             else
@@ -111,20 +113,20 @@ namespace StudentShadow.Controllers
 
         }
         /// <summary>
-        /// Deletes a record with company information with a given id
+        /// Deletes a teacher with a given id
         /// </summary>
         /// <returns></returns>
         [HttpDelete("{id}")]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
-        public async Task<ActionResult> DeleteAboutUs(int id)
+        public async Task<ActionResult> DeleteTeachers(int id)
         {
-            AboutUs deletedAboutUs = _unitOfWork.AboutUs.GetById(id);
+            Teacher deletedTeacher = await _unitOfWork.Teachers.GetByIdAsync(id);
 
-            if (deletedAboutUs != null)
+            if (deletedTeacher != null)
             {
-                _unitOfWork.AboutUs.Delete(deletedAboutUs);
-                 await _unitOfWork.CompleteAsync();
+                _unitOfWork.Teachers.Delete(deletedTeacher);
+                await _unitOfWork.CompleteAsync();
                 return NoContent();
             }
             else
@@ -132,5 +134,7 @@ namespace StudentShadow.Controllers
                 return BadRequest();
             }
         }
+
+
     }
 }

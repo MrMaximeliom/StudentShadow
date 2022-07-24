@@ -36,6 +36,8 @@ namespace StudentShadow.UnitOfWork
         IGenericRepository<ContactUs> ContactUs { get; }
 
         IGenericRepository<Attendance> Attendances { get; }
+
+        IGenericRepository<Teacher> Teachers { get; }
         int Complete();
 
         Task<int> CompleteAsync();

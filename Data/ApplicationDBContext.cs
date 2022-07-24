@@ -21,7 +21,7 @@ namespace StudentShadow.Data
         public DbSet<HomeWork> HomeWorks { get; set; } = null!;
         public DbSet<Subject> Subjects { get; set; } = null!;
         public DbSet<Schedule> Schedules { get; set; } = null!;
-        public DbSet<School> Schools { get; set; } = null!;
+        public DbSet<Contact> Schools { get; set; } = null!;
         public ApplicationDBContext()
         {
 
@@ -89,7 +89,7 @@ namespace StudentShadow.Data
             new ScheduleEntityTypeConfiguration().Configure(modelBuilder.Entity<Schedule>());
 
             //// Configuring Schools model
-            new SchoolEntityTypeConfiguration().Configure(modelBuilder.Entity<School>());
+            new SchoolEntityTypeConfiguration().Configure(modelBuilder.Entity<Contact>());
         }
     }
 }

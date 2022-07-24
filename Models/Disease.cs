@@ -8,6 +8,6 @@
 
         public  string Syptoms { get; set; }
 
-        public string GeneralDuides { get; set; }
+        public string GeneralGuides { get; set; }
     }
 }

@@ -330,7 +330,7 @@
             </summary>
             <returns></returns>
         </member>
-        <member name="M:StudentShadow.Controllers.TokensController.GetTokensByIdAsync(System.Int32)">
+        <member name="M:StudentShadow.Controllers.TokensController.GetTokenByIdAsync(System.Int32)">
             <summary>
             Returns a token by its id
             </summary>
