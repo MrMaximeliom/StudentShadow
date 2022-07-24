@@ -21,7 +21,7 @@ builder.Services.AddSwaggerGen(
     {
         c.SwaggerDoc("v1", new Microsoft.OpenApi.Models.OpenApiInfo
         {
-            Title = "Diary API",
+            Title = "Student Shadow API",
             Version = "v1",
             Description = "This .NET API was built for an application called Student Shadow , which helps to keep track of students and their activities in the school",
             Contact = new OpenApiContact
