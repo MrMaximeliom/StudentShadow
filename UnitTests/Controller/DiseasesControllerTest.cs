@@ -77,14 +77,14 @@ namespace StudentShadow.UnitTests.Controller
             Disease NewDisease = new Disease()
             {
 
-               Name = "Disabeates",
+               Name = "Diabeates",
                Syptoms="low suger in body",
                GeneralGuides="stay away from suger",
 
             };
 
             //Act
-            var CreatedResultForAddedDisease = await diseasesController.AddUser(NewDisease);
+            var CreatedResultForAddedDisease = await diseasesController.AddDisease(NewDisease);
             var CreatedResult = CreatedResultForAddedDisease as CreatedResult;
 
             //Assert

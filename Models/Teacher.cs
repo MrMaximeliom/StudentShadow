@@ -6,7 +6,7 @@
         public int Id { get; set; }
 
         public int SchoolId { get; set; }
-        public virtual Contact School { get; set; }
+        public virtual School School { get; set; }
 
         public int UserId { get; set; }
 

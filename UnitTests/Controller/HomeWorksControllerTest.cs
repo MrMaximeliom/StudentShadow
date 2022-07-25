@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
 using StudentShadow.Controllers;
+using StudentShadow.Enums;
 using StudentShadow.Models;
 using Xunit;
 namespace StudentShadow.UnitTests.Controller
@@ -59,7 +60,7 @@ namespace StudentShadow.UnitTests.Controller
 
             //Act
 
-            var actionResult = await homeWorkController.GetHomeWorkByIdAsync(homeWorkId);
+            var actionResult = await homeWorkController.GetHomeWorksByIdAsync(homeWorkId);
 
 
 
@@ -82,7 +83,7 @@ namespace StudentShadow.UnitTests.Controller
               TeacherId=1,
               AssignmentDateTime=DateTime.Now,
               DueDateTime=DateTime.Now,
-              DueStatus="Pending"
+              DueStatus=HomeWorkStatus.Pending
             
 
             };

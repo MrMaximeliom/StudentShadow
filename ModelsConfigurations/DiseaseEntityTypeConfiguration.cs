@@ -19,7 +19,7 @@ namespace StudentShadow.ModelsConfigurations
                 .HasComment("Syptoms");
 
             //Configuring GeneralGuides property
-            builder.Property(diseaseProperty => diseaseProperty.GeneralDuides)
+            builder.Property(diseaseProperty => diseaseProperty.GeneralGuides)
                 .IsRequired(false)
                 .HasComment("Disease general guides");
 

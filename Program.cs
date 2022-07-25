@@ -1,6 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
 using StudentShadow.Data;
+using StudentShadow.Middlewares;
 using StudentShadow.UnitOfWork;
 using System.Reflection;
 
@@ -58,10 +59,18 @@ var app = builder.Build();
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
-    app.UseSwagger();
-    app.UseSwaggerUI();
+    
 }
-
+UseSwaggerAuth.UseSwaggerAuthorized(app);
+app.UseSwagger();
+app.UseSwaggerUI(options =>
+    options.SwaggerEndpoint("/swagger/v1/swagger.json",
+    "Student Shadow Documentation v1"));
+    app.UseReDoc(options =>
+    {
+        options.DocumentTitle = "Student Shadow Documentation";
+        options.SpecUrl = "/swagger/v1/swagger.json";
+    });
 app.UseHttpsRedirection();
 
 app.UseAuthorization();
@@ -69,3 +78,4 @@ app.UseAuthorization();
 app.MapControllers();
 
 app.Run();
+

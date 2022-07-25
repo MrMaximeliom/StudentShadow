@@ -1,4 +1,6 @@
-﻿namespace StudentShadow.Models
+﻿using StudentShadow.Enums;
+
+namespace StudentShadow.Models
 {
     public class HomeWork
     {
@@ -17,6 +19,7 @@
 
         public DateTime? DueDateTime { get; set; }
 
-        public string DueStatus { get; set; }
+
+        public HomeWorkStatus DueStatus { get; set; }
     }
 }

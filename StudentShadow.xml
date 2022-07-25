@@ -16,7 +16,7 @@
             </summary>
             <returns></returns>
         </member>
-        <member name="M:StudentShadow.Controllers.AboutUsController.AddUser(StudentShadow.Models.AboutUs)">
+        <member name="M:StudentShadow.Controllers.AboutUsController.AddAboutUs(StudentShadow.Models.AboutUs)">
             <summary>
             Creates a record with information about the company   
             </summary>
@@ -112,7 +112,7 @@
             </summary>
             <returns></returns>
         </member>
-        <member name="M:StudentShadow.Controllers.DiseasesController.AddUser(StudentShadow.Models.Disease)">
+        <member name="M:StudentShadow.Controllers.DiseasesController.AddDisease(StudentShadow.Models.Disease)">
             <summary>
             Creates a disease   
             </summary>
@@ -321,6 +321,38 @@
         <member name="M:StudentShadow.Controllers.SubjectsController.DeleteSubjects(System.Int32)">
             <summary>
             Deletes a subject with a given id
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:StudentShadow.Controllers.TeachersController.GetTeachersAsync">
+            <summary>
+            Returns a list of teachers
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:StudentShadow.Controllers.TeachersController.GetTeacherByIdAsync(System.Int32)">
+            <summary>
+            Returns a teacher by its id
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:StudentShadow.Controllers.TeachersController.AddTeacher(StudentShadow.Models.Teacher)">
+            <summary>
+            Creates a teacher    
+            </summary>
+            <returns></returns>
+            
+        </member>
+        <member name="M:StudentShadow.Controllers.TeachersController.UpdateTeacher(System.Int32,Microsoft.AspNetCore.JsonPatch.JsonPatchDocument{StudentShadow.Models.Teacher})">
+            <summary>
+            Updates a teacher by id   
+            </summary>
+            <returns></returns>
+            
+        </member>
+        <member name="M:StudentShadow.Controllers.TeachersController.DeleteTeachers(System.Int32)">
+            <summary>
+            Deletes a teacher with a given id
             </summary>
             <returns></returns>
         </member>
