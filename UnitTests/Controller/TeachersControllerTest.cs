@@ -77,8 +77,8 @@ namespace StudentShadow.UnitTests.Controller
             Teacher NewTeacher = new Teacher()
             {
 
-                SchoolId = 1,
-                UserId = 1,
+                School = initializer.unitOfWork.Schools.GetById(1),
+                User = initializer.unitOfWork.Users.GetById(1),
                 Description = "New Teacher",
 
             };
@@ -101,7 +101,7 @@ namespace StudentShadow.UnitTests.Controller
 
             //Act 
             JsonPatchDocument<Teacher> teacherUpdate = new();
-            teacherUpdate.Replace(prop => prop.UserId, 1);
+            teacherUpdate.Replace(prop => prop.User.Id, 1);
 
             var NoContentObjectResult = await teacherController.UpdateTeacher(TeacherId, teacherUpdate);
             var NoContentResult = NoContentObjectResult as NoContentResult;

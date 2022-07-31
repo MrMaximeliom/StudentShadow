@@ -75,7 +75,7 @@ namespace StudentShadow.UnitTests.Controller
 
             Token NewToken = new Token()
             {
-                UserId = 1,
+                User = initializer.unitOfWork.Users.GetById(1),
                 RegisterationToken = "dsdsdljksdlf@!#$@34234",
                 OSType = OSType.Windows
 

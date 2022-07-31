@@ -21,16 +21,16 @@ namespace StudentShadow.ModelsConfigurations
                 .HasComment("User type");
 
             //Configuring Username property
-            builder.Property(userProperty => userProperty.Username)
+            builder.Property(userProperty => userProperty.UserName)
                 .IsRequired(false)
                 .HasMaxLength(100)
                 .HasComment("Username");
 
             //Configuring Password property
-            builder.Property(userProperty => userProperty.Password)
-                .IsRequired(true)
-                .HasMaxLength(80)
-                .HasComment("User password");
+            //builder.Property(userProperty => userProperty.Password)
+            //    .IsRequired(true)
+            //    .HasMaxLength(80)
+            //    .HasComment("User password");
 
             //Configuring Gender property
             builder.Property(userProperty => userProperty.Gender)
@@ -45,7 +45,7 @@ namespace StudentShadow.ModelsConfigurations
                 .HasComment("User email");
 
             //Configuring PrimaryPhone property
-            builder.Property(userProperty => userProperty.PrimaryPhone)
+            builder.Property(userProperty => userProperty.PhoneNumber)
                 .IsRequired(true)
                 .HasMaxLength(20)
                 .HasComment("User primary phone");
@@ -67,6 +67,8 @@ namespace StudentShadow.ModelsConfigurations
                 .IsRequired(true)
                 .HasMaxLength(300)
                 .HasComment("User QR Code");
+
+            builder.ToTable("Users", "security");
 
 
 

@@ -90,10 +90,8 @@ namespace StudentShadow.UnitTests.Controller
                 FullName = "Duaa Salim",
                 Email="Duaa@gmail.com",
                 UserType=UserType.Parent,
-                Username="@duaa",
-                Password="duaa2021",
+                UserName="@duaa",
                 Gender=Gender.Female,
-                PrimaryPhone="0999623378",
                 QRCode="#gttt#2d23W_)32w3w3"
 
             };

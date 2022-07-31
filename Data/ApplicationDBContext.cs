@@ -1,9 +1,11 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using StudentShadow.Models;
 using StudentShadow.ModelsConfigurations;
 namespace StudentShadow.Data
 {
-    public class ApplicationDBContext:DbContext
+    public class ApplicationDBContext:IdentityDbContext<User>
     {
         public DbSet<User> Users { get; set; } = null!;
         public DbSet<Wallet> Wallets { get; set; } = null!;
@@ -38,6 +40,7 @@ namespace StudentShadow.Data
          
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            base.OnModelCreating(modelBuilder);
             // Configuring Users model
             new UserEntityTypeConfiguration().Configure(modelBuilder.Entity<User>());
 
@@ -90,6 +93,26 @@ namespace StudentShadow.Data
 
             //// Configuring Schools model
             new SchoolEntityTypeConfiguration().Configure(modelBuilder.Entity<School>());
+
+            modelBuilder.Entity<IdentityRole>().ToTable("Roles", "security");
+
+            modelBuilder.Entity<IdentityUserRole<string>>().ToTable("UserRoles", "security");
+
+            modelBuilder.Entity<IdentityUserClaim<string>>().ToTable("UserClaims", "security");
+
+            modelBuilder.Entity<IdentityUserLogin<string>>().ToTable("UserLogins", "security");
+
+            modelBuilder.Entity<IdentityRoleClaim<string>>().ToTable("RoleClaims", "security");
+
+            modelBuilder.Entity<IdentityUserToken<string>>().ToTable("UserTokens ", "security");
+
+            modelBuilder.Entity<HomeWork>()
+           
+          
+           
+           ;
+       
+           
         }
     }
 }

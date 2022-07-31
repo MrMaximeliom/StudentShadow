@@ -9,6 +9,9 @@ namespace StudentShadow.Migrations
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.EnsureSchema(
+                name: "security");
+
             migrationBuilder.CreateTable(
                 name: "AboutUs",
                 columns: table => new
@@ -51,7 +54,7 @@ namespace StudentShadow.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(type: "nvarchar(300)", maxLength: 300, nullable: false, comment: "Disease name"),
                     Syptoms = table.Column<string>(type: "nvarchar(max)", nullable: true, comment: "Syptoms"),
-                    GeneralDuides = table.Column<string>(type: "nvarchar(max)", nullable: true, comment: "Disease general guides")
+                    GeneralGuides = table.Column<string>(type: "nvarchar(max)", nullable: true, comment: "Disease general guides")
                 },
                 constraints: table =>
                 {
@@ -72,6 +75,21 @@ namespace StudentShadow.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Roles",
+                schema: "security",
+                columns: table => new
+                {
+                    Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    Name = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
+                    NormalizedName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
+                    ConcurrencyStamp = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Roles", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Schools",
                 columns: table => new
                 {
@@ -87,52 +105,35 @@ namespace StudentShadow.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Tokens",
+                name: "Users",
+                schema: "security",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    RegisterationToken = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: false, comment: "Registeration Token"),
-                    UserId = table.Column<int>(type: "int", nullable: false),
-                    OSType = table.Column<int>(type: "int", maxLength: 10, nullable: true, comment: "OS Type")
+                    Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    FullName = table.Column<string>(type: "nvarchar(400)", maxLength: 400, nullable: false, comment: "User full name"),
+                    UserType = table.Column<int>(type: "int", maxLength: 8, nullable: false, comment: "User type"),
+                    Gender = table.Column<int>(type: "int", maxLength: 10, nullable: false, comment: "User gender"),
+                    SecondaryPhone = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: true, comment: "User secondary phone"),
+                    Image = table.Column<string>(type: "nvarchar(400)", maxLength: 400, nullable: true, comment: "User image"),
+                    QRCode = table.Column<string>(type: "nvarchar(300)", maxLength: 300, nullable: false, comment: "User QR Code"),
+                    UserName = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: true, comment: "Username"),
+                    NormalizedUserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
+                    Email = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false, comment: "User email"),
+                    NormalizedEmail = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
+                    EmailConfirmed = table.Column<bool>(type: "bit", nullable: false),
+                    PasswordHash = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    SecurityStamp = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    ConcurrencyStamp = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    PhoneNumber = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: false, comment: "User primary phone"),
+                    PhoneNumberConfirmed = table.Column<bool>(type: "bit", nullable: false),
+                    TwoFactorEnabled = table.Column<bool>(type: "bit", nullable: false),
+                    LockoutEnd = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: true),
+                    LockoutEnabled = table.Column<bool>(type: "bit", nullable: false),
+                    AccessFailedCount = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Tokens", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Tokens_Users_UserId",
-                        column: x => x.UserId,
-                        principalTable: "Users",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "MedicalHistories",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    UserId = table.Column<int>(type: "int", nullable: false),
-                    DiseaseId = table.Column<int>(type: "int", nullable: false),
-                    ExaminedDateTime = table.Column<DateTime>(type: "datetime2", nullable: true, comment: "Examined Date and Time"),
-                    Note = table.Column<string>(type: "nvarchar(max)", nullable: true, comment: "Notes")
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_MedicalHistories", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_MedicalHistories_Diseases_DiseaseId",
-                        column: x => x.DiseaseId,
-                        principalTable: "Diseases",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_MedicalHistories_Users_UserId",
-                        column: x => x.UserId,
-                        principalTable: "Users",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                    table.PrimaryKey("PK_Users", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -160,6 +161,58 @@ namespace StudentShadow.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "RoleClaims",
+                schema: "security",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    RoleId = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    ClaimType = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    ClaimValue = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_RoleClaims", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_RoleClaims_Roles_RoleId",
+                        column: x => x.RoleId,
+                        principalSchema: "security",
+                        principalTable: "Roles",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "MedicalHistories",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    UserId = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    DiseaseId = table.Column<int>(type: "int", nullable: false),
+                    ExaminedDateTime = table.Column<DateTime>(type: "datetime2", nullable: true, comment: "Examined Date and Time"),
+                    Note = table.Column<string>(type: "nvarchar(max)", nullable: true, comment: "Notes")
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_MedicalHistories", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_MedicalHistories_Diseases_DiseaseId",
+                        column: x => x.DiseaseId,
+                        principalTable: "Diseases",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_MedicalHistories_Users_UserId",
+                        column: x => x.UserId,
+                        principalSchema: "security",
+                        principalTable: "Users",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Students",
                 columns: table => new
                 {
@@ -167,7 +220,7 @@ namespace StudentShadow.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     SchoolId = table.Column<int>(type: "int", nullable: false),
                     GradeId = table.Column<int>(type: "int", nullable: false),
-                    UserId = table.Column<int>(type: "int", nullable: false)
+                    UserId = table.Column<string>(type: "nvarchar(450)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -187,6 +240,7 @@ namespace StudentShadow.Migrations
                     table.ForeignKey(
                         name: "FK_Students_Users_UserId",
                         column: x => x.UserId,
+                        principalSchema: "security",
                         principalTable: "Users",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
@@ -199,7 +253,7 @@ namespace StudentShadow.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     SchoolId = table.Column<int>(type: "int", nullable: false),
-                    UserId = table.Column<int>(type: "int", nullable: false),
+                    UserId = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     Description = table.Column<string>(type: "nvarchar(300)", maxLength: 300, nullable: true, comment: "Description")
                 },
                 constraints: table =>
@@ -214,30 +268,147 @@ namespace StudentShadow.Migrations
                     table.ForeignKey(
                         name: "FK_Teachers_Users_UserId",
                         column: x => x.UserId,
+                        principalSchema: "security",
                         principalTable: "Users",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
-                name: "Notifications",
+                name: "Tokens",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    TokenId = table.Column<int>(type: "int", nullable: false),
-                    Title = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: false, comment: "Notification title"),
-                    Content = table.Column<string>(type: "nvarchar(300)", maxLength: 300, nullable: false, comment: "Notification content"),
-                    DateTime = table.Column<DateTime>(type: "datetime2", nullable: true, comment: "Notification date"),
-                    Type = table.Column<int>(type: "int", maxLength: 50, nullable: false, comment: "Notification type")
+                    RegisterationToken = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: false, comment: "Registeration Token"),
+                    UserId = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    OSType = table.Column<int>(type: "int", maxLength: 10, nullable: true, comment: "OS Type")
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Notifications", x => x.Id);
+                    table.PrimaryKey("PK_Tokens", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Notifications_Tokens_TokenId",
-                        column: x => x.TokenId,
-                        principalTable: "Tokens",
+                        name: "FK_Tokens_Users_UserId",
+                        column: x => x.UserId,
+                        principalSchema: "security",
+                        principalTable: "Users",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "UserClaims",
+                schema: "security",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    UserId = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    ClaimType = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    ClaimValue = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_UserClaims", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_UserClaims_Users_UserId",
+                        column: x => x.UserId,
+                        principalSchema: "security",
+                        principalTable: "Users",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "UserLogins",
+                schema: "security",
+                columns: table => new
+                {
+                    LoginProvider = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    ProviderKey = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    ProviderDisplayName = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    UserId = table.Column<string>(type: "nvarchar(450)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_UserLogins", x => new { x.LoginProvider, x.ProviderKey });
+                    table.ForeignKey(
+                        name: "FK_UserLogins_Users_UserId",
+                        column: x => x.UserId,
+                        principalSchema: "security",
+                        principalTable: "Users",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "UserRoles",
+                schema: "security",
+                columns: table => new
+                {
+                    UserId = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    RoleId = table.Column<string>(type: "nvarchar(450)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_UserRoles", x => new { x.UserId, x.RoleId });
+                    table.ForeignKey(
+                        name: "FK_UserRoles_Roles_RoleId",
+                        column: x => x.RoleId,
+                        principalSchema: "security",
+                        principalTable: "Roles",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_UserRoles_Users_UserId",
+                        column: x => x.UserId,
+                        principalSchema: "security",
+                        principalTable: "Users",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "UserTokens ",
+                schema: "security",
+                columns: table => new
+                {
+                    UserId = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    LoginProvider = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    Name = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    Value = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_UserTokens ", x => new { x.UserId, x.LoginProvider, x.Name });
+                    table.ForeignKey(
+                        name: "FK_UserTokens _Users_UserId",
+                        column: x => x.UserId,
+                        principalSchema: "security",
+                        principalTable: "Users",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Wallets",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    UserId = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    QRCode = table.Column<string>(type: "nvarchar(300)", maxLength: 300, nullable: false, comment: "QRCode"),
+                    Amount = table.Column<decimal>(type: "decimal(9,3)", precision: 9, scale: 3, nullable: false, comment: "Wallet amount"),
+                    LastUpdatedDateTime = table.Column<DateTime>(type: "datetime2", nullable: true, comment: "LastUpdated")
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Wallets", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Wallets_Users_UserId",
+                        column: x => x.UserId,
+                        principalSchema: "security",
+                        principalTable: "Users",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -248,7 +419,7 @@ namespace StudentShadow.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    UserId = table.Column<int>(type: "int", nullable: false),
+                    UserId = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     SubjectId = table.Column<int>(type: "int", nullable: false),
                     DateTime = table.Column<DateTime>(type: "datetime2", nullable: true, comment: "Date"),
                     IsAttended = table.Column<bool>(type: "bit", maxLength: 3, nullable: false, comment: "Is student attended?")
@@ -265,6 +436,7 @@ namespace StudentShadow.Migrations
                     table.ForeignKey(
                         name: "FK_Attendances_Users_UserId",
                         column: x => x.UserId,
+                        principalSchema: "security",
                         principalTable: "Users",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
@@ -276,7 +448,7 @@ namespace StudentShadow.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    UserId = table.Column<int>(type: "int", nullable: false),
+                    UserId = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     SubjectId = table.Column<int>(type: "int", nullable: false),
                     CharGrade = table.Column<string>(type: "nvarchar(10)", maxLength: 10, nullable: false, comment: "Char grade"),
                     DateTime = table.Column<DateTime>(type: "datetime2", nullable: true, comment: "Date")
@@ -293,6 +465,7 @@ namespace StudentShadow.Migrations
                     table.ForeignKey(
                         name: "FK_Degrees_Users_UserId",
                         column: x => x.UserId,
+                        principalSchema: "security",
                         principalTable: "Users",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
@@ -324,12 +497,12 @@ namespace StudentShadow.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    StudentId = table.Column<int>(type: "int", nullable: true),
-                    SubjectId = table.Column<int>(type: "int", nullable: true),
-                    TeacherId = table.Column<int>(type: "int", nullable: true),
+                    StudentId = table.Column<int>(type: "int", nullable: false),
+                    SubjectId = table.Column<int>(type: "int", nullable: false),
+                    TeacherId = table.Column<int>(type: "int", nullable: false),
                     AssignmentDateTime = table.Column<DateTime>(type: "datetime2", nullable: true, comment: "Assignment date"),
                     DueDateTime = table.Column<DateTime>(type: "datetime2", nullable: false, comment: "Due date"),
-                    DueStatus = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false, comment: "Due status")
+                    DueStatus = table.Column<int>(type: "int", maxLength: 100, nullable: false, comment: "Due status")
                 },
                 constraints: table =>
                 {
@@ -371,6 +544,29 @@ namespace StudentShadow.Migrations
                         name: "FK_SubjectTeacher_Teachers_TeachersId",
                         column: x => x.TeachersId,
                         principalTable: "Teachers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Notifications",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    TokenId = table.Column<int>(type: "int", nullable: false),
+                    Title = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: false, comment: "Notification title"),
+                    Content = table.Column<string>(type: "nvarchar(300)", maxLength: 300, nullable: false, comment: "Notification content"),
+                    DateTime = table.Column<DateTime>(type: "datetime2", nullable: true, comment: "Notification date"),
+                    Type = table.Column<int>(type: "int", maxLength: 50, nullable: false, comment: "Notification type")
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Notifications", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Notifications_Tokens_TokenId",
+                        column: x => x.TokenId,
+                        principalTable: "Tokens",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -426,6 +622,20 @@ namespace StudentShadow.Migrations
                 column: "TokenId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_RoleClaims_RoleId",
+                schema: "security",
+                table: "RoleClaims",
+                column: "RoleId");
+
+            migrationBuilder.CreateIndex(
+                name: "RoleNameIndex",
+                schema: "security",
+                table: "Roles",
+                column: "NormalizedName",
+                unique: true,
+                filter: "[NormalizedName] IS NOT NULL");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Schedules_SubjectId",
                 table: "Schedules",
                 column: "SubjectId");
@@ -434,12 +644,6 @@ namespace StudentShadow.Migrations
                 name: "IX_Students_GradeId",
                 table: "Students",
                 column: "GradeId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Students_Id_UserId",
-                table: "Students",
-                columns: new[] { "Id", "UserId" },
-                unique: true);
 
             migrationBuilder.CreateIndex(
                 name: "IX_Students_SchoolId",
@@ -462,12 +666,6 @@ namespace StudentShadow.Migrations
                 column: "TeachersId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Teachers_Id_UserId",
-                table: "Teachers",
-                columns: new[] { "Id", "UserId" },
-                unique: true);
-
-            migrationBuilder.CreateIndex(
                 name: "IX_Teachers_SchoolId",
                 table: "Teachers",
                 column: "SchoolId");
@@ -480,6 +678,43 @@ namespace StudentShadow.Migrations
             migrationBuilder.CreateIndex(
                 name: "IX_Tokens_UserId",
                 table: "Tokens",
+                column: "UserId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_UserClaims_UserId",
+                schema: "security",
+                table: "UserClaims",
+                column: "UserId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_UserLogins_UserId",
+                schema: "security",
+                table: "UserLogins",
+                column: "UserId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_UserRoles_RoleId",
+                schema: "security",
+                table: "UserRoles",
+                column: "RoleId");
+
+            migrationBuilder.CreateIndex(
+                name: "EmailIndex",
+                schema: "security",
+                table: "Users",
+                column: "NormalizedEmail");
+
+            migrationBuilder.CreateIndex(
+                name: "UserNameIndex",
+                schema: "security",
+                table: "Users",
+                column: "NormalizedUserName",
+                unique: true,
+                filter: "[NormalizedUserName] IS NOT NULL");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Wallets_UserId",
+                table: "Wallets",
                 column: "UserId");
         }
 
@@ -507,10 +742,33 @@ namespace StudentShadow.Migrations
                 name: "Notifications");
 
             migrationBuilder.DropTable(
+                name: "RoleClaims",
+                schema: "security");
+
+            migrationBuilder.DropTable(
                 name: "Schedules");
 
             migrationBuilder.DropTable(
                 name: "SubjectTeacher");
+
+            migrationBuilder.DropTable(
+                name: "UserClaims",
+                schema: "security");
+
+            migrationBuilder.DropTable(
+                name: "UserLogins",
+                schema: "security");
+
+            migrationBuilder.DropTable(
+                name: "UserRoles",
+                schema: "security");
+
+            migrationBuilder.DropTable(
+                name: "UserTokens ",
+                schema: "security");
+
+            migrationBuilder.DropTable(
+                name: "Wallets");
 
             migrationBuilder.DropTable(
                 name: "Students");
@@ -528,10 +786,18 @@ namespace StudentShadow.Migrations
                 name: "Teachers");
 
             migrationBuilder.DropTable(
+                name: "Roles",
+                schema: "security");
+
+            migrationBuilder.DropTable(
                 name: "Grades");
 
             migrationBuilder.DropTable(
                 name: "Schools");
+
+            migrationBuilder.DropTable(
+                name: "Users",
+                schema: "security");
         }
     }
 }

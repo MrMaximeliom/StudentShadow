@@ -76,7 +76,7 @@ namespace StudentShadow.UnitTests.Controller
 
             Wallet NewWallet = new Wallet()
             {
-                UserId = 1,
+                User = initializer.unitOfWork.Users.GetById(1),
                 Amount = 1233.50M,
                 QRCode = "#gttt#2d2aqw_)32w3w3"
 

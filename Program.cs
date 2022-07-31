@@ -1,13 +1,19 @@
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
 using StudentShadow.Data;
+using StudentShadow.Helpers;
 using StudentShadow.Middlewares;
+using StudentShadow.Models;
 using StudentShadow.UnitOfWork;
 using System.Reflection;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+builder.Services.Configure<JWT>(builder.Configuration.GetSection("JWT"));
+
+builder.Services.AddIdentity<User, IdentityRole>().AddEntityFrameworkStores<ApplicationDBContext>();
 
 builder.Services.AddControllers();
 // Add DB Context

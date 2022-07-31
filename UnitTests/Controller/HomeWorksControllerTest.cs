@@ -78,9 +78,9 @@ namespace StudentShadow.UnitTests.Controller
             HomeWork NewHomeWork = new HomeWork()
             {
 
-              StudentId=1,
-              SubjectId=1,
-              TeacherId=1,
+              Student= initializer.unitOfWork.Students.GetById(1),
+              Subject= initializer.unitOfWork.Subjects.GetById(1),
+              Teacher= initializer.unitOfWork.Teachers.GetById(1),
               AssignmentDateTime=DateTime.Now,
               DueDateTime=DateTime.Now,
               DueStatus=HomeWorkStatus.Pending
@@ -106,7 +106,7 @@ namespace StudentShadow.UnitTests.Controller
 
             //Act 
             JsonPatchDocument<HomeWork> homeWorkUpdate = new();
-            homeWorkUpdate.Replace(prop => prop.StudentId, 1);
+            homeWorkUpdate.Replace(prop => prop.Student.Id, 1);
 
             var NoContentObjectResult = await homeWorkController.UpdateHomeWork(HomeWorkId, homeWorkUpdate);
             var NoContentResult = NoContentObjectResult as NoContentResult;

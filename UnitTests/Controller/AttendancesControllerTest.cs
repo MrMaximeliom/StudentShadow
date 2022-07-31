@@ -77,8 +77,8 @@ namespace StudentShadow.UnitTests.Controller
             Attendance NewAttendance = new Attendance()
             {
 
-               UserId = 1,
-               SubjectId=1,
+               User = initializer.unitOfWork.Users.GetById(1),
+               Subject= initializer.unitOfWork.Subjects.GetById(1),
                DateTime=DateTime.Now,
                IsAttended=true
 
@@ -102,7 +102,7 @@ namespace StudentShadow.UnitTests.Controller
 
             //Act 
             JsonPatchDocument<Attendance> schoolAttendance = new();
-            schoolAttendance.Replace(prop => prop.UserId, 1);
+            schoolAttendance.Replace(prop => prop.User.Id, 1);
 
             var NoContentObjectResult = await attendancesController.UpdateAttendance(AttendanceId, schoolAttendance);
             var NoContentResult = NoContentObjectResult as NoContentResult;

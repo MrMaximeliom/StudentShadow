@@ -78,7 +78,7 @@ namespace StudentShadow.UnitTests.Controller
             {
 
                 Title = "English",
-                GradeId = 1,
+                Grade = initializer.unitOfWork.Grades.GetById(1),
                 StartDateTime = DateTime.Now,
                 FullDegree = 100,
                 PassDegree=60,

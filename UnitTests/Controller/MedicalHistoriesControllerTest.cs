@@ -73,8 +73,8 @@ namespace StudentShadow.UnitTests.Controller
             MedicalHistory NewMedicalHistory = new MedicalHistory()
             {
 
-                UserId = 1,
-               DiseaseId = 1,
+                User = initializer.unitOfWork.Users.GetById(1),
+               Disease = initializer.unitOfWork.Diseases.GetById(1),
                ExaminedDateTime = DateTime.Now,
                Note="Medical History"
             };
@@ -97,7 +97,7 @@ namespace StudentShadow.UnitTests.Controller
 
             //Act 
             JsonPatchDocument<MedicalHistory> medicalHistoryUpdate = new();
-            medicalHistoryUpdate.Replace(prop => prop.UserId, 1);
+            medicalHistoryUpdate.Replace(prop => prop.User.Id, 1);
 
             var NoContentObjectResult = await medicalHistoriesController.UpdateMedicalHistory(MedicalHistoryId, medicalHistoryUpdate);
             var NoContentResult = NoContentObjectResult as NoContentResult;

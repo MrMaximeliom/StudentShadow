@@ -7,8 +7,8 @@
 
         public string Title { get; set; }
 
-        public int GradeId { get; set; }
         public virtual Grade Grade { get; set; }
+
 
         public DateTime? StartDateTime { get; set; }
 

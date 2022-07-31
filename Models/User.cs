@@ -1,8 +1,9 @@
-﻿using StudentShadow.Enums;
+﻿using Microsoft.AspNetCore.Identity;
+using StudentShadow.Enums;
 namespace StudentShadow.Models
 {
    
-    public class User
+    public class User : IdentityUser
     {
         public int Id { get; set; }
 
@@ -10,16 +11,7 @@ namespace StudentShadow.Models
 
         public UserType UserType { get; set; }
 
-        public string  Username { get; set; }
-
-        public string Password { get; set; }
-
         public Gender Gender { get; set; }
-
-        public string  Email { get; set; }
-
-
-        public string PrimaryPhone { get; set; }
 
         public string? SecondaryPhone { get; set; }
 

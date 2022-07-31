@@ -17,9 +17,10 @@ namespace StudentShadow.ModelsConfigurations
             //    .IsRequired(true)
             //    .HasComment("Teacher Id");
 
-            builder.HasIndex(
-               b => new { b.Id, b.UserId }
-                ).IsUnique();
+            //builder.HasIndex(
+            //   b => new { b.Id, b.User }
+            //    ).IsUnique();
+            
 
             //Configuring Description property
             builder.Property(teacherProperty => teacherProperty.Description)

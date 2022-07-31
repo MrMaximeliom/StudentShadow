@@ -23,10 +23,10 @@ namespace StudentShadow.ModelsConfigurations
             //    .IsRequired(false)
             //    .HasComment("User Id");
 
-            builder.HasIndex(
-               b => new { b.Id, b.UserId }
-                )
-                .IsUnique();
+            //builder.HasIndex(
+            //   b => new { b.Id, b.User }
+            //    )
+            //    .IsUnique();
 
         }
 

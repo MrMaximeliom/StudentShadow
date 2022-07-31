@@ -77,7 +77,7 @@ namespace StudentShadow.UnitTests.Controller
             Schedule NewSchedule = new Schedule()
             {
 
-                SubjectId = 1,
+                Subject = initializer.unitOfWork.Subjects.GetById(1),
                 DateTime = DateTime.Now,
             
 
@@ -101,7 +101,7 @@ namespace StudentShadow.UnitTests.Controller
 
             //Act 
             JsonPatchDocument<Schedule> scheduleUpdate = new();
-            scheduleUpdate.Replace(prop => prop.SubjectId, 1);
+            scheduleUpdate.Replace(prop => prop.Subject.Id, 1);
 
             var NoContentObjectResult = await scheduleController.UpdateSchedule(ScheduleId, scheduleUpdate);
             var NoContentResult = NoContentObjectResult as NoContentResult;

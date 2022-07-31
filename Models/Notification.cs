@@ -6,8 +6,8 @@ namespace StudentShadow.Models
     {
         public int Id { get; set; }
 
-        public int TokenId { get; set; }
         public virtual Token Token { get; set; }
+
 
         public string Title { get; set; }
 

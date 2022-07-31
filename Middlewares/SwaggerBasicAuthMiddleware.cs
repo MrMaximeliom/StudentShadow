@@ -36,7 +36,7 @@ namespace StudentShadow.Middlewares
                     var credentials = Encoding.UTF8.GetString(inBytes).Split(':');
                     var username = credentials[0];
                     var password = credentials[1];
-                    User? user =  await unitOfWork.Users.FindAsync(prop => prop.Username == credentials[0] && prop.Password == credentials[1],null);
+                    User? user =  await unitOfWork.Users.FindAsync(prop => prop.UserName == credentials[0] && prop.PasswordHash == credentials[1],null);
                     // validate credentials
                     if (user != null)
                     {
