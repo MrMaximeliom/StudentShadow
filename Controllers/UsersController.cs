@@ -1,6 +1,9 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
+using StudentShadow.Helpers;
 using StudentShadow.Models;
 using StudentShadow.UnitOfWork;
 using System.Net.Mime;
@@ -10,14 +13,18 @@ namespace StudentShadow.Controllers
     [Route("api/[controller]")]
     [Produces(MediaTypeNames.Application.Json)]
     [Consumes(MediaTypeNames.Application.Json)]
+    [Authorize(Roles ="Admin")]
     [ApiController]
     public class UsersController : ControllerBase
     {
         private readonly IUnitOfWork _unitOfWork;
-        
-        public UsersController(IUnitOfWork unitOfWork)
+        private readonly IPasswordHasher<User> _passwordHasher;
+
+
+        public UsersController(IUnitOfWork unitOfWork, IPasswordHasher<User> passwordHasher)
         {
             _unitOfWork = unitOfWork;
+            _passwordHasher = passwordHasher;
         }
         /// <summary>
         /// Returns a list of users 
@@ -70,13 +77,45 @@ namespace StudentShadow.Controllers
         [HttpPost]
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public async Task<IActionResult> AddUser(User user)
+        //public async Task<IActionResult> AddUser(User user)
+        //{
+        //   User? newUser = await _unitOfWork.Users.AddAsync(user);
+        //    if(newUser != null)
+        //    {
+        //        await _unitOfWork.CompleteAsync();
+        //        return Created("User Added Successfully", user);
+
+        //    }
+        //    else
+        //    {
+        //        return BadRequest();
+
+
+        //    }
+
+        //}
+        public async Task<IActionResult> AddUser(CustomUser user)
         {
-           User? newUser = await _unitOfWork.Users.AddAsync(user);
-            if(newUser != null)
+             User newUser = new User()
+            {
+                Id = user.Id,
+                UserName = user.UserName,
+                Email = user.Email,
+                FullName = user.FullName,
+                Gender = user.Gender,
+                SecondaryPhone = user.SecondaryPhone,
+                Image = user.Image,
+                QRCode = user.QRCode,
+                PhoneNumber = user.PhoneNumber
+            };
+            newUser.PasswordHash = _passwordHasher.HashPassword(newUser, user.Password);
+            newUser.SecurityStamp = Guid.NewGuid().ToString();
+
+            User? addedUser = await _unitOfWork.Users.AddAsync(newUser);
+            if (addedUser != null)
             {
                 await _unitOfWork.CompleteAsync();
-                return Created("User Added Successfully", user);
+                return Created("User Added Successfully", addedUser);
 
             }
             else

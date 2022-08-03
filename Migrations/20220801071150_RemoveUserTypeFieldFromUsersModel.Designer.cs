@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using StudentShadow.Data;
 
@@ -11,9 +12,10 @@ using StudentShadow.Data;
 namespace StudentShadow.Migrations
 {
     [DbContext(typeof(ApplicationDBContext))]
-    partial class ApplicationDBContextModelSnapshot : ModelSnapshot
+    [Migration("20220801071150_RemoveUserTypeFieldFromUsersModel")]
+    partial class RemoveUserTypeFieldFromUsersModel
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -710,6 +712,7 @@ namespace StudentShadow.Migrations
                         .HasColumnType("bit");
 
                     b.Property<string>("QRCode")
+                        .IsRequired()
                         .HasMaxLength(300)
                         .HasColumnType("nvarchar(300)")
                         .HasComment("User QR Code");

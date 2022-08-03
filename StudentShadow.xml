@@ -400,7 +400,7 @@
             </summary>
             <returns></returns>
         </member>
-        <member name="M:StudentShadow.Controllers.UsersController.AddUser(StudentShadow.Models.User)">
+        <member name="M:StudentShadow.Controllers.UsersController.AddUser(StudentShadow.Helpers.CustomUser)">
             <summary>
             Creates a user    
             </summary>

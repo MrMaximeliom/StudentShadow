@@ -9,15 +9,13 @@ namespace StudentShadow.Models
 
         public string FullName { get; set; }
 
-        public UserType UserType { get; set; }
-
         public Gender Gender { get; set; }
 
         public string? SecondaryPhone { get; set; }
 
-        public string Image { get; set; }
+        public string? Image { get; set; }
 
-        public string QRCode { get; set; }
+        public string? QRCode { get; set; }
 
     }
 }

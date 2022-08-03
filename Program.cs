@@ -1,12 +1,16 @@
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using StudentShadow.Data;
 using StudentShadow.Helpers;
 using StudentShadow.Middlewares;
 using StudentShadow.Models;
+using StudentShadow.Services;
 using StudentShadow.UnitOfWork;
 using System.Reflection;
+using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -15,7 +19,36 @@ builder.Services.Configure<JWT>(builder.Configuration.GetSection("JWT"));
 
 builder.Services.AddIdentity<User, IdentityRole>().AddEntityFrameworkStores<ApplicationDBContext>();
 
+builder.Services.AddScoped<IAuthService, AuthService>();
+
+builder.Services.AddAuthentication(options =>
+{
+    options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+    options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+
+})
+    .AddJwtBearer(
+    o =>
+    {
+        o.RequireHttpsMetadata = false;
+        o.SaveToken = false;
+        o.TokenValidationParameters = new TokenValidationParameters
+        {
+            ValidateIssuerSigningKey = true,
+            ValidateIssuer = true,
+            ValidateAudience = true,
+            ValidateLifetime = true,
+            ValidIssuer = builder.Configuration["JWT:Issuer"],
+            ValidAudience = builder.Configuration["JWT:Audience"],
+            IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["JWT:Key"]))
+
+        };     
+
+
+    });
+
 builder.Services.AddControllers();
+
 // Add DB Context
 builder.Services.AddDbContext<ApplicationDBContext>(
 
@@ -23,6 +56,7 @@ builder.Services.AddDbContext<ApplicationDBContext>(
         builder.Configuration.GetConnectionString("DefaultConnection"),
     b => b.MigrationsAssembly(typeof(ApplicationDBContext).Assembly.FullName))
     );
+   
 builder.Services.AddSwaggerGen(
     c =>
     {
@@ -67,7 +101,7 @@ if (app.Environment.IsDevelopment())
 {
     
 }
-UseSwaggerAuth.UseSwaggerAuthorized(app);
+//UseSwaggerAuth.UseSwaggerAuthorized(app);
 app.UseSwagger();
 app.UseSwaggerUI(options =>
     options.SwaggerEndpoint("/swagger/v1/swagger.json",
@@ -78,6 +112,8 @@ app.UseSwaggerUI(options =>
         options.SpecUrl = "/swagger/v1/swagger.json";
     });
 app.UseHttpsRedirection();
+
+app.UseAuthentication();
 
 app.UseAuthorization();
 

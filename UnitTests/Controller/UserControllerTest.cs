@@ -1,7 +1,9 @@
-﻿using Microsoft.AspNetCore.JsonPatch;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
 using StudentShadow.Controllers;
 using StudentShadow.Enums;
+using StudentShadow.Helpers;
 using StudentShadow.Models;
 using Xunit;
 
@@ -13,10 +15,12 @@ namespace StudentShadow.UnitTests.Controller
         UsersController userController;
         Initializer initializer;
 
-        public UserControllerTest()
+
+        public UserControllerTest( IPasswordHasher<User> _passwordHasher)
         {
+            
              initializer = new Initializer();
-            userController = new(initializer.unitOfWork);
+            userController = new(initializer.unitOfWork, _passwordHasher);
         }
 
 
@@ -85,13 +89,13 @@ namespace StudentShadow.UnitTests.Controller
         {
             //Arange
 
-            User NewUser = new User()
+            CustomUser NewUser = new CustomUser()
             {
                 FullName = "Duaa Salim",
                 Email="Duaa@gmail.com",
-                UserType=UserType.Parent,
                 UserName="@duaa",
                 Gender=Gender.Female,
+                Password="123",
                 QRCode="#gttt#2d23W_)32w3w3"
 
             };

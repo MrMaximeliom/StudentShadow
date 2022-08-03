@@ -14,12 +14,6 @@ namespace StudentShadow.ModelsConfigurations
                 .HasMaxLength(400)
                 .HasComment("User full name");
 
-            //Configuring UserType property
-            builder.Property(userProperty => userProperty.UserType)
-                .IsRequired(true)
-                .HasMaxLength(8)
-                .HasComment("User type");
-
             //Configuring Username property
             builder.Property(userProperty => userProperty.UserName)
                 .IsRequired(false)
@@ -64,7 +58,7 @@ namespace StudentShadow.ModelsConfigurations
 
             //Configuring QRCode property
             builder.Property(userProperty => userProperty.QRCode)
-                .IsRequired(true)
+                .IsRequired(false)
                 .HasMaxLength(300)
                 .HasComment("User QR Code");
 
