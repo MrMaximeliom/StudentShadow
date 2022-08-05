@@ -13,7 +13,7 @@ namespace StudentShadow.Controllers
     [Route("api/[controller]")]
     [Produces(MediaTypeNames.Application.Json)]
     [Consumes(MediaTypeNames.Application.Json)]
-    [Authorize(Roles ="Admin")]
+    //[Authorize(Roles ="Admin")]
     [ApiController]
     public class UsersController : ControllerBase
     {

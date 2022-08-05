@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Options;
+using StudentShadow.Helpers;
 using StudentShadow.Models;
 using StudentShadow.ModelsConfigurations;
 namespace StudentShadow.Data
@@ -24,13 +26,17 @@ namespace StudentShadow.Data
         public DbSet<Subject> Subjects { get; set; } = null!;
         public DbSet<Schedule> Schedules { get; set; } = null!;
         public DbSet<School> Schools { get; set; } = null!;
+
         public ApplicationDBContext()
         {
 
         }
+
+
         protected override void OnConfiguring(DbContextOptionsBuilder options)
         {
-            options.UseSqlServer("Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=StudentShadow;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False");
+             //options.UseSqlServer("Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=StudentShadow;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False");
+            options.UseNpgsql("Server=ec2-3-213-228-206.compute-1.amazonaws.com;Username=voqekddzxrdksu;Password=c357f1685eef8d003f542738c868a00957ff827267f2859b3e15d7b513ad97db;Database=dai9jb8u8tfm6r;Pooling=False");
 
         }
         public ApplicationDBContext(DbContextOptions<ApplicationDBContext> options) : base(options)
