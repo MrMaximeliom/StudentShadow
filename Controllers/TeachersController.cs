@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.JsonPatch;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
 using StudentShadow.Models;
 using StudentShadow.UnitOfWork;
@@ -27,6 +28,7 @@ namespace StudentShadow.Controllers
         [HttpGet]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [Authorize(Roles ="Admin")]
         public async Task<IActionResult> GetTeachersAsync()
         {
             IEnumerable<Teacher> allTeachers = await _unitOfWork.Teachers.GetAllAsync();
@@ -48,6 +50,7 @@ namespace StudentShadow.Controllers
         [HttpGet("{id}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [Authorize]
         public async Task<IActionResult> GetTeacherByIdAsync(int id)
         {
             Teacher? fetchedTeacher = await _unitOfWork.Teachers.GetByIdAsync(id);
@@ -69,6 +72,7 @@ namespace StudentShadow.Controllers
         [HttpPost]
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [Authorize(Roles ="Admin")]
         public async Task<IActionResult> AddTeacher(Teacher teacher)
         {
             Teacher? newTeacher = await _unitOfWork.Teachers.AddAsync(teacher);
@@ -95,6 +99,7 @@ namespace StudentShadow.Controllers
         [HttpPatch("{id}")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [Authorize]
         public async Task<ActionResult> UpdateTeacher(int id, JsonPatchDocument<Teacher> teacherUpdates)
         {
             Teacher? teacher = await _unitOfWork.Teachers.GetByIdAsync(id);
@@ -119,6 +124,7 @@ namespace StudentShadow.Controllers
         [HttpDelete("{id}")]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [Authorize]
         public async Task<ActionResult> DeleteTeachers(int id)
         {
             Teacher deletedTeacher = await _unitOfWork.Teachers.GetByIdAsync(id);

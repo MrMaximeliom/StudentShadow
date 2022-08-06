@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using StudentShadow.UnitOfWork;
 using System.Net.Mime;
 using Microsoft.AspNetCore.JsonPatch;
+using Microsoft.AspNetCore.Authorization;
 
 namespace StudentShadow.Controllers
 {
@@ -26,6 +27,7 @@ namespace StudentShadow.Controllers
         [HttpGet]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [Authorize]
         public async Task<IActionResult> GetAttendancesAsync()
         {
             IEnumerable<Attendance> allAttendances = await _unitOfWork.Attendances.GetAllAsync();
@@ -47,6 +49,7 @@ namespace StudentShadow.Controllers
         [HttpGet("{id}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [Authorize]
         public async Task<IActionResult> GetAttendanceByIdAsync(int id)
         {
             Attendance? fetchedAttendance = await _unitOfWork.Attendances.GetByIdAsync(id);
@@ -68,6 +71,7 @@ namespace StudentShadow.Controllers
         [HttpPost]
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [Authorize]
         public async Task<IActionResult> AddAttendance(Attendance attendance)
         {
             Attendance? newAttendance = await _unitOfWork.Attendances.AddAsync(attendance);
@@ -93,6 +97,7 @@ namespace StudentShadow.Controllers
         [HttpPatch("{id}")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [Authorize]
         public async Task<ActionResult> UpdateAttendance(int id, JsonPatchDocument<Attendance> attendanceUpdates)
         {
             Attendance? attendance = await _unitOfWork.Attendances.GetByIdAsync(id);
@@ -117,6 +122,7 @@ namespace StudentShadow.Controllers
         [HttpDelete("{id}")]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [Authorize]
         public async Task<ActionResult> DeleteAttendances(int id)
         {
             Attendance deletedAttendance = await _unitOfWork.Attendances.GetByIdAsync(id);

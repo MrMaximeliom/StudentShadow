@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
 using StudentShadow.Models;
@@ -28,6 +29,7 @@ namespace StudentShadow.Controllers
         [HttpGet]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [Authorize]
         public async Task<IActionResult> GetHomeWorksAsync()
         {
             IEnumerable<HomeWork> allHomeWorks = await _unitOfWork.HomeWorks.GetAllAsync();
@@ -49,6 +51,7 @@ namespace StudentShadow.Controllers
         [HttpGet("{id}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [Authorize]
         public async Task<IActionResult> GetHomeWorksByIdAsync(int id)
         {
             HomeWork? fetchedHomeWorks = await _unitOfWork.HomeWorks.GetByIdAsync(id);
@@ -70,6 +73,7 @@ namespace StudentShadow.Controllers
         [HttpPost]
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [Authorize]
         public async Task<IActionResult> AddHomeWorks(HomeWork homeWork)
         {
             HomeWork? newHomeWork = await _unitOfWork.HomeWorks.AddAsync(homeWork);
@@ -95,6 +99,7 @@ namespace StudentShadow.Controllers
         [HttpPatch("{id}")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [Authorize]
         public async Task<ActionResult> UpdateHomeWork(int id, JsonPatchDocument<HomeWork> homeWorkUpdates)
         {
             HomeWork? homeWork = await _unitOfWork.HomeWorks.GetByIdAsync(id);
@@ -119,6 +124,7 @@ namespace StudentShadow.Controllers
         [HttpDelete("{id}")]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [Authorize]
         public async Task<ActionResult> DeleteHomeWorks(int id)
         {
             HomeWork deletedHomeWork = await _unitOfWork.HomeWorks.GetByIdAsync(id);

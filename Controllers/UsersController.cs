@@ -31,6 +31,7 @@ namespace StudentShadow.Controllers
         /// </summary>
         /// <returns></returns>
 
+        [Authorize(Roles = "Admin")]
         [HttpGet]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
@@ -56,6 +57,7 @@ namespace StudentShadow.Controllers
         [HttpGet("{id}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [Authorize]
         public async Task<IActionResult> GetUserByIdAsync(int id)
         {
             User? fetchedUser = await _unitOfWork.Users.GetByIdAsync(id);
@@ -77,23 +79,7 @@ namespace StudentShadow.Controllers
         [HttpPost]
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        //public async Task<IActionResult> AddUser(User user)
-        //{
-        //   User? newUser = await _unitOfWork.Users.AddAsync(user);
-        //    if(newUser != null)
-        //    {
-        //        await _unitOfWork.CompleteAsync();
-        //        return Created("User Added Successfully", user);
-
-        //    }
-        //    else
-        //    {
-        //        return BadRequest();
-
-
-        //    }
-
-        //}
+        [Authorize(Roles ="Admin")]
         public async Task<IActionResult> AddUser(CustomUser user)
         {
              User newUser = new User()
@@ -134,6 +120,7 @@ namespace StudentShadow.Controllers
         [HttpPatch("{id}")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [Authorize]
         public async Task<ActionResult> UpdateUser(int id,JsonPatchDocument<User> userUpdates)
         {
             User? user = await _unitOfWork.Users.GetByIdAsync(id);
@@ -158,6 +145,7 @@ namespace StudentShadow.Controllers
         [HttpDelete("{id}")]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [Authorize]
         public async Task<ActionResult> DeleteUsers(int id)
         {
             User deletedUser = await _unitOfWork.Users.GetByIdAsync(id);

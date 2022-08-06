@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
 using StudentShadow.Models;
@@ -27,6 +28,7 @@ namespace StudentShadow.Controllers
         [HttpGet]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [Authorize]
         public async Task<IActionResult> GetDiseasesAsync()
         {
             IEnumerable<Disease> allDiseases = await _unitOfWork.Diseases.GetAllAsync();
@@ -48,6 +50,7 @@ namespace StudentShadow.Controllers
         [HttpGet("{id}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [Authorize]
         public async Task<IActionResult> GetDiseaseByIdAsync(int id)
         {
             Disease? fetchedDisease = await _unitOfWork.Diseases.GetByIdAsync(id);
@@ -69,6 +72,7 @@ namespace StudentShadow.Controllers
         [HttpPost]
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [Authorize]
         public async Task<IActionResult> AddDisease(Disease disease)
         {
             Disease? newDisease = await _unitOfWork.Diseases.AddAsync(disease);
@@ -94,6 +98,7 @@ namespace StudentShadow.Controllers
         [HttpPatch("{id}")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [Authorize]
         public async Task<ActionResult> UpdateDisease(int id, JsonPatchDocument<Disease> diseaseUpdates)
         {
             Disease? disease = await _unitOfWork.Diseases.GetByIdAsync(id);
@@ -118,6 +123,7 @@ namespace StudentShadow.Controllers
         [HttpDelete("{id}")]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [Authorize]
         public async Task<ActionResult> DeleteDisease(int id)
         {
             Disease deletedDisease = await _unitOfWork.Diseases.GetByIdAsync(id);

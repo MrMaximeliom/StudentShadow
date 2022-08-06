@@ -57,7 +57,16 @@ namespace StudentShadow.Services
                 return new AuthModel { Message = errors };
 
             }
+            // check to see if role exists or not
+            
+            if(!await _roleManager.RoleExistsAsync("User"))
+            {
+                await _roleManager.CreateAsync(new IdentityRole("User"));
+
+            }
             await _userManager.AddToRoleAsync(user, "User");
+
+           
 
             var jwtSecurityToken = await CreateJwtToken(user);
 

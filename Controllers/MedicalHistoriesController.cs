@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
 using StudentShadow.Models;
@@ -27,6 +28,7 @@ namespace StudentShadow.Controllers
         [HttpGet]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [Authorize(Roles ="Admin")]
         public async Task<IActionResult> GetMedicalHistoriesAsync()
         {
             IEnumerable<MedicalHistory> allMedicalHistories = await _unitOfWork.MedicalHistories.GetAllAsync();
@@ -48,6 +50,7 @@ namespace StudentShadow.Controllers
         [HttpGet("{id}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [Authorize]
         public async Task<IActionResult> GetMedicalHistoriesByIdAsync(int id)
         {
             MedicalHistory? fetchedMedicalHistories = await _unitOfWork.MedicalHistories.GetByIdAsync(id);
@@ -69,6 +72,7 @@ namespace StudentShadow.Controllers
         [HttpPost]
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [Authorize]
         public async Task<IActionResult> AddMedicalHistory(MedicalHistory medicalHistory)
         {
             MedicalHistory? newMedicalHistory = await _unitOfWork.MedicalHistories.AddAsync(medicalHistory);
@@ -95,6 +99,7 @@ namespace StudentShadow.Controllers
         [HttpPatch("{id}")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [Authorize]
         public async Task<ActionResult> UpdateMedicalHistory(int id, JsonPatchDocument<MedicalHistory> medicalHistoryUpdates)
         {
             MedicalHistory? medicalHistory = await _unitOfWork.MedicalHistories.GetByIdAsync(id);
@@ -119,6 +124,7 @@ namespace StudentShadow.Controllers
         [HttpDelete("{id}")]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [Authorize]
         public async Task<ActionResult> DeleteMedicalHistories(int id)
         {
             MedicalHistory deletedMedicalHistory = await _unitOfWork.MedicalHistories.GetByIdAsync(id);

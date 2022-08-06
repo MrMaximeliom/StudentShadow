@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using StudentShadow.Helpers;
 using StudentShadow.Models;
@@ -16,7 +17,7 @@ namespace StudentShadow.Controllers
         {
             _authService = authService;
         }
-        [HttpPost("register")]
+        [HttpPost("Register")]
         public async Task<IActionResult> RegisterAsync(CustomUser model)
         {
             if (!ModelState.IsValid) 
@@ -33,7 +34,7 @@ namespace StudentShadow.Controllers
             return Ok(result);
 
         }
-        [HttpPost("token")]
+        [HttpPost("LogIn")]
         public async Task<IActionResult> GetTokenAsync(TokenRequestModel model)
         {
             if (!ModelState.IsValid)
@@ -50,7 +51,8 @@ namespace StudentShadow.Controllers
             return Ok(result);
 
         }
-        [HttpPost("addrole")]
+        [HttpPost("AddRole")]
+        [Authorize(Roles ="Admin")]
         public async Task<IActionResult> AddRoleAsync(AddRoleModel model)
         {
             if (!ModelState.IsValid)

@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
 using StudentShadow.Models;
@@ -28,6 +29,7 @@ namespace StudentShadow.Controllers
         [HttpGet]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [Authorize(Roles ="Admin")]
         public async Task<IActionResult> GetWalletsAsync()
         {
             IEnumerable<Wallet> allWallets = await _unitOfWork.Wallets.GetAllAsync();
@@ -49,6 +51,7 @@ namespace StudentShadow.Controllers
         [HttpGet("{id}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [Authorize]
         public async Task<IActionResult> GetWalletByIdAsync(int id)
         {
             Wallet? fetchedWallet = await _unitOfWork.Wallets.GetByIdAsync(id);
@@ -70,6 +73,7 @@ namespace StudentShadow.Controllers
         [HttpPost]
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [Authorize]
         public async Task<IActionResult> AddWallet(Wallet wallet)
         {
             Wallet? newWallet = await _unitOfWork.Wallets.AddAsync(wallet);
@@ -96,6 +100,7 @@ namespace StudentShadow.Controllers
         [HttpPatch("{id}")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [Authorize]
         public async  Task<ActionResult> UpdateWallet(int id, JsonPatchDocument<Wallet> walletUpdates)
         {
             Wallet? wallet = await _unitOfWork.Wallets.GetByIdAsync(id);
@@ -120,6 +125,7 @@ namespace StudentShadow.Controllers
         [HttpDelete("{id}")]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [Authorize]
         public async Task<ActionResult> DeleteWallets(int id)
         {
             Wallet deletedWallet = await _unitOfWork.Wallets.GetByIdAsync(id);
