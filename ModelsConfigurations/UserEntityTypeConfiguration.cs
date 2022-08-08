@@ -8,6 +8,9 @@ namespace StudentShadow.ModelsConfigurations
     {
         public void Configure(EntityTypeBuilder<User> builder )
         {
+         
+          
+
             // Configuring FullName property
             builder.Property(userProperty => userProperty.FullName)
                 .IsRequired(true)

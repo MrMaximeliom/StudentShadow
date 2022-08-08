@@ -5,7 +5,7 @@ namespace StudentShadow.Helpers
 {
     public class CustomUser
     {
-        public int Id { get; set; }
+        public string Id { get; set; }
 
         [Required,StringLength(300)]
         public string FullName { get; set; }

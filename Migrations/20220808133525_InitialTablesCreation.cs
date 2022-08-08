@@ -6,7 +6,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace StudentShadow.Migrations
 {
-    public partial class InitialCreation : Migration
+    public partial class InitialTablesCreation : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -189,7 +189,7 @@ namespace StudentShadow.Migrations
                 {
                     Id = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    UserId = table.Column<string>(type: "text", nullable: false),
+                    UserId = table.Column<string>(type: "text", nullable: true),
                     DiseaseId = table.Column<int>(type: "integer", nullable: false),
                     ExaminedDateTime = table.Column<DateTime>(type: "timestamp with time zone", nullable: true, comment: "Examined Date and Time"),
                     Note = table.Column<string>(type: "text", nullable: true, comment: "Notes")
@@ -208,8 +208,7 @@ namespace StudentShadow.Migrations
                         column: x => x.UserId,
                         principalSchema: "security",
                         principalTable: "Users",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "Id");
                 });
 
             migrationBuilder.CreateTable(
@@ -220,7 +219,7 @@ namespace StudentShadow.Migrations
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     SchoolId = table.Column<int>(type: "integer", nullable: false),
                     GradeId = table.Column<int>(type: "integer", nullable: false),
-                    UserId = table.Column<string>(type: "text", nullable: false)
+                    UserId = table.Column<string>(type: "text", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -242,8 +241,7 @@ namespace StudentShadow.Migrations
                         column: x => x.UserId,
                         principalSchema: "security",
                         principalTable: "Users",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "Id");
                 });
 
             migrationBuilder.CreateTable(
@@ -253,7 +251,7 @@ namespace StudentShadow.Migrations
                     Id = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     SchoolId = table.Column<int>(type: "integer", nullable: false),
-                    UserId = table.Column<string>(type: "text", nullable: false),
+                    UserId = table.Column<string>(type: "text", nullable: true),
                     Description = table.Column<string>(type: "character varying(300)", maxLength: 300, nullable: true, comment: "Description")
                 },
                 constraints: table =>
@@ -270,8 +268,7 @@ namespace StudentShadow.Migrations
                         column: x => x.UserId,
                         principalSchema: "security",
                         principalTable: "Users",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "Id");
                 });
 
             migrationBuilder.CreateTable(
@@ -281,7 +278,7 @@ namespace StudentShadow.Migrations
                     Id = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     RegisterationToken = table.Column<string>(type: "character varying(200)", maxLength: 200, nullable: false, comment: "Registeration Token"),
-                    UserId = table.Column<string>(type: "text", nullable: false),
+                    UserId = table.Column<string>(type: "text", nullable: true),
                     OSType = table.Column<int>(type: "integer", maxLength: 10, nullable: true, comment: "OS Type")
                 },
                 constraints: table =>
@@ -292,8 +289,7 @@ namespace StudentShadow.Migrations
                         column: x => x.UserId,
                         principalSchema: "security",
                         principalTable: "Users",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "Id");
                 });
 
             migrationBuilder.CreateTable(
@@ -419,7 +415,7 @@ namespace StudentShadow.Migrations
                 {
                     Id = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    UserId = table.Column<string>(type: "text", nullable: false),
+                    UserId = table.Column<string>(type: "text", nullable: true),
                     SubjectId = table.Column<int>(type: "integer", nullable: false),
                     DateTime = table.Column<DateTime>(type: "timestamp with time zone", nullable: true, comment: "Date"),
                     IsAttended = table.Column<bool>(type: "boolean", maxLength: 3, nullable: false, comment: "Is student attended?")
@@ -438,8 +434,7 @@ namespace StudentShadow.Migrations
                         column: x => x.UserId,
                         principalSchema: "security",
                         principalTable: "Users",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "Id");
                 });
 
             migrationBuilder.CreateTable(
@@ -448,7 +443,7 @@ namespace StudentShadow.Migrations
                 {
                     Id = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    UserId = table.Column<string>(type: "text", nullable: false),
+                    UserId = table.Column<string>(type: "text", nullable: true),
                     SubjectId = table.Column<int>(type: "integer", nullable: false),
                     CharGrade = table.Column<string>(type: "character varying(10)", maxLength: 10, nullable: false, comment: "Char grade"),
                     DateTime = table.Column<DateTime>(type: "timestamp with time zone", nullable: true, comment: "Date")
@@ -467,8 +462,7 @@ namespace StudentShadow.Migrations
                         column: x => x.UserId,
                         principalSchema: "security",
                         principalTable: "Users",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "Id");
                 });
 
             migrationBuilder.CreateTable(

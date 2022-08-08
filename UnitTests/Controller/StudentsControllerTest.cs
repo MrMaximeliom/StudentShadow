@@ -101,7 +101,7 @@ namespace StudentShadow.UnitTests.Controller
 
             //Act 
             JsonPatchDocument<Student> studentUpdate = new();
-            studentUpdate.Replace(prop => prop.User.Id, 1);
+            studentUpdate.Replace(prop => prop.User.Id, "1");
 
             var NoContentObjectResult = await studentController.UpdateStudent(StudentId, studentUpdate);
             var NoContentResult = NoContentObjectResult as NoContentResult;

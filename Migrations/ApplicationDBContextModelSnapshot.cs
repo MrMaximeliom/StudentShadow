@@ -25,6 +25,7 @@ namespace StudentShadow.Migrations
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
                 {
                     b.Property<string>("Id")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("text");
 
                     b.Property<string>("ConcurrencyStamp")
@@ -217,7 +218,6 @@ namespace StudentShadow.Migrations
                         .HasColumnType("integer");
 
                     b.Property<string>("UserId")
-                        .IsRequired()
                         .HasColumnType("text");
 
                     b.HasKey("Id");
@@ -293,7 +293,6 @@ namespace StudentShadow.Migrations
                         .HasColumnType("integer");
 
                     b.Property<string>("UserId")
-                        .IsRequired()
                         .HasColumnType("text");
 
                     b.HasKey("Id");
@@ -413,7 +412,6 @@ namespace StudentShadow.Migrations
                         .HasComment("Notes");
 
                     b.Property<string>("UserId")
-                        .IsRequired()
                         .HasColumnType("text");
 
                     b.HasKey("Id");
@@ -530,7 +528,6 @@ namespace StudentShadow.Migrations
                         .HasColumnType("integer");
 
                     b.Property<string>("UserId")
-                        .IsRequired()
                         .HasColumnType("text");
 
                     b.HasKey("Id");
@@ -603,7 +600,6 @@ namespace StudentShadow.Migrations
                         .HasColumnType("integer");
 
                     b.Property<string>("UserId")
-                        .IsRequired()
                         .HasColumnType("text");
 
                     b.HasKey("Id");
@@ -635,7 +631,6 @@ namespace StudentShadow.Migrations
                         .HasComment("Registeration Token");
 
                     b.Property<string>("UserId")
-                        .IsRequired()
                         .HasColumnType("text");
 
                     b.HasKey("Id");
@@ -851,9 +846,7 @@ namespace StudentShadow.Migrations
 
                     b.HasOne("StudentShadow.Models.User", "User")
                         .WithMany()
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("UserId");
 
                     b.Navigation("Subject");
 
@@ -870,9 +863,7 @@ namespace StudentShadow.Migrations
 
                     b.HasOne("StudentShadow.Models.User", "User")
                         .WithMany()
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("UserId");
 
                     b.Navigation("Subject");
 
@@ -916,9 +907,7 @@ namespace StudentShadow.Migrations
 
                     b.HasOne("StudentShadow.Models.User", "User")
                         .WithMany()
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("UserId");
 
                     b.Navigation("Disease");
 
@@ -963,9 +952,7 @@ namespace StudentShadow.Migrations
 
                     b.HasOne("StudentShadow.Models.User", "User")
                         .WithMany()
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("UserId");
 
                     b.Navigation("Grade");
 
@@ -995,9 +982,7 @@ namespace StudentShadow.Migrations
 
                     b.HasOne("StudentShadow.Models.User", "User")
                         .WithMany()
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("UserId");
 
                     b.Navigation("School");
 
@@ -1008,9 +993,7 @@ namespace StudentShadow.Migrations
                 {
                     b.HasOne("StudentShadow.Models.User", "User")
                         .WithMany()
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("UserId");
 
                     b.Navigation("User");
                 });

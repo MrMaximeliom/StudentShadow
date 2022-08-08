@@ -97,7 +97,7 @@ namespace StudentShadow.UnitTests.Controller
 
             //Act 
             JsonPatchDocument<MedicalHistory> medicalHistoryUpdate = new();
-            medicalHistoryUpdate.Replace(prop => prop.User.Id, 1);
+            medicalHistoryUpdate.Replace(prop => prop.User.Id, "1");
 
             var NoContentObjectResult = await medicalHistoriesController.UpdateMedicalHistory(MedicalHistoryId, medicalHistoryUpdate);
             var NoContentResult = NoContentObjectResult as NoContentResult;

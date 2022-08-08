@@ -95,6 +95,9 @@ namespace StudentShadow.Data
             //// Configuring Schools model
             new SchoolEntityTypeConfiguration().Configure(modelBuilder.Entity<School>());
 
+            //// Configuring Roles model
+            new RolesEntityTypeConfiguration().Configure(modelBuilder.Entity<IdentityRole>());
+
             modelBuilder.Entity<IdentityRole>().ToTable("Roles", "security");
 
             modelBuilder.Entity<IdentityUserRole<string>>().ToTable("UserRoles", "security");
