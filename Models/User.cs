@@ -1,5 +1,7 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using StudentShadow.Enums;
+using System.ComponentModel.DataAnnotations;
+
 namespace StudentShadow.Models
 {
    
@@ -16,6 +18,8 @@ namespace StudentShadow.Models
         public string? Image { get; set; }
 
         public string? QRCode { get; set; }
+
+     
 
     }
 }

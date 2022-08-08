@@ -31,7 +31,7 @@ namespace StudentShadow.Controllers
         /// </summary>
         /// <returns></returns>
 
-        [Authorize(Roles = "Admin")]
+        [Authorize]
         [HttpGet]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]

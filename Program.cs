@@ -54,8 +54,8 @@ builder.Services.AddControllers();
 // Add DB Context
 builder.Services.AddDbContext<ApplicationDBContext>(
 
-    options => options.UseNpgsql(
-        builder.Configuration.GetConnectionString("PostgresConnection"),
+    options => options.UseSqlServer(
+        builder.Configuration.GetConnectionString("DefaultConnection"),
     b => b.MigrationsAssembly(typeof(ApplicationDBContext).Assembly.FullName))
     );
    

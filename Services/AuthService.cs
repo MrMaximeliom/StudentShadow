@@ -1,8 +1,10 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
+using StudentShadow.Data;
 using StudentShadow.Helpers;
 using StudentShadow.Models;
+using StudentShadow.UnitOfWork;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
@@ -12,15 +14,17 @@ namespace StudentShadow.Services
     public class AuthService : IAuthService
     {
         private readonly UserManager<User> _userManager;
+        private readonly ApplicationDBContext _context;
         private readonly RoleManager<IdentityRole> _roleManager;
 
         private readonly JWT _jwt;
 
-        public AuthService(UserManager<User> userManager, IOptions<JWT> jwt, RoleManager<IdentityRole> roleManager)
+        public AuthService(UserManager<User> userManager, IOptions<JWT> jwt, RoleManager<IdentityRole> roleManager, ApplicationDBContext context)
         {
             _userManager = userManager;
             _jwt = jwt.Value;
             _roleManager = roleManager;
+            _context = context;
         }
 
         public async Task<AuthModel> RegisterAsync(CustomUser model)
@@ -34,6 +38,12 @@ namespace StudentShadow.Services
             {
                 return new AuthModel { Message = "Username is already registered!" };
             }
+            // TODO: check phone nuber is duplicated or not
+            if (_userManager.Users.Where(m => m.PhoneNumber == model.PhoneNumber) is not null)
+            {
+                return new AuthModel { Message = "PhoneNumber is already registered!" };
+            }
+           
             var user = new User
             {
                 Id = model.Id,
@@ -44,12 +54,13 @@ namespace StudentShadow.Services
                 Gender = model.Gender,
 
             };
+
             var result = await _userManager.CreateAsync(user, model.Password);
 
             if (!result.Succeeded)
             {
                 var errors = string.Empty;
-                foreach(var error in result.Errors)
+                foreach (var error in result.Errors)
                 {
                     errors += $"{error.Description},";
 

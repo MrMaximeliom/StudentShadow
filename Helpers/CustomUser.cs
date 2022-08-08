@@ -24,7 +24,7 @@ namespace StudentShadow.Helpers
         [Required, StringLength(40)]
         public string UserName { get; set; }
 
-        [Required, StringLength(10)]
+        [Required, StringLength(40)]
         public string Password { get; set; }
 
         [Required, StringLength(20)]
