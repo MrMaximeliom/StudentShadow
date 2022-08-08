@@ -39,7 +39,7 @@ namespace StudentShadow.Services
                 return new AuthModel { Message = "Username is already registered!" };
             }
             // TODO: check phone nuber is duplicated or not
-            if (_userManager.Users.Where(m => m.PhoneNumber == model.PhoneNumber) is not null)
+            if (_userManager.Users.Any(item => item.PhoneNumber == model.PhoneNumber))
             {
                 return new AuthModel { Message = "PhoneNumber is already registered!" };
             }
