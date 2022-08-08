@@ -54,15 +54,15 @@ builder.Services.AddControllers();
 // Add DB Context
 builder.Services.AddDbContext<ApplicationDBContext>(
 
-    options => options.UseSqlServer(
-        builder.Configuration.GetConnectionString("DefaultConnection"),
+    options => options.UseNpgsql(
+        builder.Configuration.GetConnectionString("PostgresConnection"),
     b => b.MigrationsAssembly(typeof(ApplicationDBContext).Assembly.FullName))
     );
    
 builder.Services.AddSwaggerGen(
     c =>
     {
-        c.SwaggerDoc("v1", new Microsoft.OpenApi.Models.OpenApiInfo
+        c.SwaggerDoc("v1", new OpenApiInfo
         {
             Title = "Student Shadow API",
             Version = "v1",
