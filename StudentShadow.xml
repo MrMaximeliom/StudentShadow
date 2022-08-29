@@ -100,6 +100,38 @@
             </summary>
             <returns></returns>
         </member>
+        <member name="M:StudentShadow.Controllers.DegreesController.GetDegreesAsync">
+            <summary>
+            Returns a list of degrees 
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:StudentShadow.Controllers.DegreesController.GetDegreeByIdAsync(System.Int32)">
+            <summary>
+            Returns a degree by its id
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:StudentShadow.Controllers.DegreesController.AddUser(StudentShadow.Models.Degree)">
+            <summary>
+            Creates a degree    
+            </summary>
+            <returns></returns>
+            
+        </member>
+        <member name="M:StudentShadow.Controllers.DegreesController.UpdateDegree(System.Int32,Microsoft.AspNetCore.JsonPatch.JsonPatchDocument{StudentShadow.Models.Degree})">
+            <summary>
+            Updates a degree by id   
+            </summary>
+            <returns></returns>
+            
+        </member>
+        <member name="M:StudentShadow.Controllers.DegreesController.DeleteDegrees(System.Int32)">
+            <summary>
+            Deletes a degree with a given id
+            </summary>
+            <returns></returns>
+        </member>
         <member name="M:StudentShadow.Controllers.DiseasesController.GetDiseasesAsync">
             <summary>
             Returns a list of diseases 
@@ -193,6 +225,38 @@
         <member name="M:StudentShadow.Controllers.MedicalHistoriesController.DeleteMedicalHistories(System.Int32)">
             <summary>
             Deletes a medical history with a given id
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:StudentShadow.Controllers.NotificationsController.GetNotificationsAsync">
+            <summary>
+            Returns a list of notifcations
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:StudentShadow.Controllers.NotificationsController.GetNotificationByIdAsync(System.Int32)">
+            <summary>
+            Returns a notification by its id
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:StudentShadow.Controllers.NotificationsController.AddNotification(StudentShadow.Models.Notification)">
+            <summary>
+            Creates a notification   
+            </summary>
+            <returns></returns>
+            
+        </member>
+        <member name="M:StudentShadow.Controllers.NotificationsController.UpdateNotification(System.Int32,Microsoft.AspNetCore.JsonPatch.JsonPatchDocument{StudentShadow.Models.Notification})">
+            <summary>
+            Updates a notification by id   
+            </summary>
+            <returns></returns>
+            
+        </member>
+        <member name="M:StudentShadow.Controllers.NotificationsController.DeleteNotifications(System.Int32)">
+            <summary>
+            Deletes a notification with a given id
             </summary>
             <returns></returns>
         </member>
